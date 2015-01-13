@@ -8,8 +8,13 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
+#include "WPILib.h"
 #include "MoveElevator.h"
+
+Joystick * opStick;
+Robot robotInstance;
+float joystickY;
+bool isTopLimitHit, isBottomLimitHit;
 
 MoveElevator::MoveElevator() {
 	// Use requires() here to declare subsystem dependencies
@@ -22,12 +27,26 @@ MoveElevator::MoveElevator() {
 
 // Called just before this Command runs the first time
 void MoveElevator::Initialize() {
-	
+	opStick = Robot::oi->getOpStick();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void MoveElevator::Execute() {
-	
+
+	//setting the values of the limit switches and joystick input on Y axis
+	joystickY = opStick->GetY();
+	isTopLimitHit = RobotMap::elevatorElevatorTopLimit->Get();
+	isBottomLimitHit = RobotMap::elevatorElevatorBottomLimit->Get();
+
+	//if we are already at the top and the operator wants to move up, talon power is set to 0.0, and if we are already at the bottom,
+	//and the operator is trying to go down, talon power is set to 0.0
+	if(robotInstance.signOf(joystickY) == -1 && isBottomLimitHit){
+		RobotMap::elevatorElevatorTalon->Set(0.0);
+	}else if(robotInstance.signOf(joystickY) == 1 && isTopLimitHit){
+		RobotMap::elevatorElevatorTalon->Set(0.0);
+	}else{
+		RobotMap::elevatorElevatorTalon->Set(joystickY);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

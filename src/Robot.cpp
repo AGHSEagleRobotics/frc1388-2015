@@ -76,5 +76,22 @@ void Robot::TestPeriodic() {
 	lw->Run();
 }
 
-START_ROBOT_CLASS(Robot);
 
+float Robot::JoystickDeadband(float joystickReturn){
+	if(fabs(joystickReturn) < 0.1){
+		return 0.0;
+	}
+	return joystickReturn;
+}
+
+signed int Robot::signOf(float input){
+	if(input < 0){
+		return -1;
+	}else if(input > 0){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
+START_ROBOT_CLASS(Robot);
