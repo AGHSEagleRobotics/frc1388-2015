@@ -1,10 +1,18 @@
 Version 1.5
 
 ---
+Name: frc1388-2015
+Base: Robot
 Children:
-- Children:
-  - Children:
-    - Children: []
+- Name: Subsystems
+  Base: Subsystems
+  Children:
+  - Name: Elevator
+    Base: Subsystem
+    Children:
+    - Name: ElevatorTalon
+      Base: Speed Controller
+      Children: []
       Properties:
         Type: !!robotbuilder.data.properties.ChoicesProperty
           choices: [Victor, Jaguar, Talon, VictorSP, TalonSRX]
@@ -19,9 +27,9 @@ Children:
           name: Output Channel (PWM)
           validators: [PWMOutput]
           value: '0'
-      Base: Speed Controller
-      Name: ElevatorTalon
-    - Children: []
+    - Name: ElevatorEncoder
+      Base: Quadrature Encoder
+      Children: []
       Properties:
         Channel A Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
           choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
@@ -55,9 +63,9 @@ Children:
           name: Channel B Channel (Digital)
           validators: [DigitalChannel]
           value: '1'
-      Base: Quadrature Encoder
-      Name: ElevatorEncoder
-    - Children: []
+    - Name: ElevatorTopLimit
+      Base: Limit Switch
+      Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
           choices: &id001 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
@@ -67,9 +75,9 @@ Children:
           name: Input Channel (Digital)
           validators: &id002 [DigitalChannel]
           value: '2'
+    - Name: ElevatorBottomLimit
       Base: Limit Switch
-      Name: ElevatorTopLimit
-    - Children: []
+      Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id001
@@ -77,18 +85,16 @@ Children:
           name: Input Channel (Digital)
           validators: *id002
           value: '3'
-      Base: Limit Switch
-      Name: ElevatorBottomLimit
     Properties:
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Default Command, type: Command, validators: null, value: None}
-    Base: Subsystem
-    Name: Elevator
   Properties: {}
-  Base: Subsystems
-  Name: Subsystems
-- Children:
-  - Children: []
+- Name: Operator Interface
+  Base: OI
+  Children:
+  - Name: OpStick
+    Base: Joystick
+    Children: []
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
         choices: ['0', '1', '2', '3', '4', '5']
@@ -96,42 +102,38 @@ Children:
         name: Number
         validators: [Joystick]
         value: '1'
-    Base: Joystick
-    Name: OpStick
   Properties: {}
-  Base: OI
-  Name: Operator Interface
-- Children:
-  - Children: []
+- Name: Commands
+  Base: Commands
+  Children:
+  - Name: Autonomous Command
+    Base: Command
+    Children: []
     Properties:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: None}
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
+  - Name: MoveElevator
     Base: Command
-    Name: Autonomous Command
-  - Children: []
+    Children: []
     Properties:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Elevator}
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
+  - Name: SetElevatorZeroPoint
     Base: Command
-    Name: MoveElevator
-  - Children: []
+    Children: []
     Properties:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Elevator}
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
-    Base: Command
-    Name: SetElevatorZeroPoint
   Properties: {}
-  Base: Commands
-  Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Joey\workspace',
-    extension: null, folder: true, name: Eclipse Workspace, validators: null, value: 'C:\EagleRobotics1388\workspace'}
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Jeff\workspace',
+    extension: null, folder: true, name: Eclipse Workspace, validators: null, value: ..\}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
   Java Package: !!robotbuilder.data.properties.StringProperty {default: org.usfirst.frc0000,
@@ -148,5 +150,3 @@ Properties:
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
-Base: Robot
-Name: EagleRobotics-1388-2015
