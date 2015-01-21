@@ -26,9 +26,9 @@ void Drive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Drive::Execute() {
-	float joystickX = RobotInstance.JoystickDeadband(Robot::oi->getdrivestick()->GetX());
-	float joystickY = RobotInstance.JoystickDeadband(Robot::oi->getdrivestick()->GetY());
-	float joystickZ = RobotInstance.JoystickDeadband(Robot::oi->getdrivestick()->GetZ());
+	float joystickX = Robot::oi->joystickDeadband(Robot::oi->getdrivestick()->GetX());
+	float joystickY = Robot::oi->joystickDeadband(Robot::oi->getdrivestick()->GetY());
+	float joystickZ = Robot::oi->joystickDeadband(Robot::oi->getdrivestick()->GetZ());
 
 	Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(
 			joystickX,

@@ -45,6 +45,5 @@ void GoToPickup::End() {
 void GoToPickup::Interrupted() {
 
 }
-#include "Commands/MoveElevator.h"
 
 

@@ -80,12 +80,6 @@ void Robot::TestPeriodic() {
 }
 
 
-float Robot::JoystickDeadband(float joystickReturn){
-	if(fabs(joystickReturn) < 0.1){
-		return 0.0;
-	}
-	return joystickReturn;
-}
 
 signed int Robot::signOf(float input){
 	if(input < 0){

@@ -44,7 +44,6 @@ public:
 	virtual void TeleopInit();
 	virtual void TeleopPeriodic();
 	virtual void TestPeriodic();
-	float JoystickDeadband(float joystickReturn);
 	signed int signOf(float input);
 };
 #endif
