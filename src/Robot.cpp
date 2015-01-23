@@ -71,7 +71,6 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-
 	Scheduler::GetInstance()->Run();
 }
 
@@ -79,16 +78,5 @@ void Robot::TestPeriodic() {
 	lw->Run();
 }
 
-
-
-signed int Robot::signOf(float input){
-	if(input < 0){
-		return -1;
-	}else if(input > 0){
-		return 1;
-	}else{
-		return 0;
-	}
-}
-
 START_ROBOT_CLASS(Robot);
+

@@ -44,6 +44,5 @@ public:
 	virtual void TeleopInit();
 	virtual void TeleopPeriodic();
 	virtual void TestPeriodic();
-	signed int signOf(float input);
 };
 #endif

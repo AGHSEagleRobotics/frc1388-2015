@@ -27,27 +27,17 @@ void SetElevatorZeroPoint::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void SetElevatorZeroPoint::Execute() {
-	bool isTopLimitHit = RobotMap::elevatorElevatorTopLimit->Get();
 	
-	if(!isTopLimitHit){
-		RobotMap::elevatorElevatorTalon->Set(0.3);
-	}else{
-		RobotMap::elevatorElevatorTalon->Set(0.0);
-	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool SetElevatorZeroPoint::IsFinished() {
-	if(!RobotMap::elevatorElevatorTopLimit->Get()){
-		return false;
-	}else{
-		return true;
-	}
+	return false;
 }
 
 // Called once after isFinished returns true
 void SetElevatorZeroPoint::End() {
-	RobotMap::elevatorElevatorEncoder->Reset();
+	
 }
 
 // Called when another command which requires one or more of the same
