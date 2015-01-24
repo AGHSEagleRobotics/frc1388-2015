@@ -22,17 +22,16 @@ Drive::Drive() {
 
 // Called just before this Command runs the first time
 void Drive::Initialize() {
-	
+
 }
 
 // Called repeatedly when this Command is scheduled to run
 void Drive::Execute() {
-	Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(
-			Robot::oi->getOpStick()->GetX(),
-			Robot::oi->getOpStick()->GetY(),
-			Robot::oi->getOpStick()->GetZ(),
-			0
-			);
+	float joystickX = Robot::oi->getDriveStickX();
+	float joystickY = Robot::oi->getDriveStickY();
+	float joystickZ = Robot::oi->getDriveStickZ();
+
+	Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(joystickX, joystickY, joystickZ, 0);
 }
 
 // Make this return true when this Command no longer needs to run execute()

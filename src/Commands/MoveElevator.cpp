@@ -27,7 +27,15 @@ void MoveElevator::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void MoveElevator::Execute() {
-	
+	float joystickY = Robot::oi->getOpStickY();
+
+	if(joystickY < 0 && RobotMap::elevatorElevatorBottomLimit->Get()){
+		RobotMap::elevatorElevatorTalon->Set(0.0);
+	}else if(joystickY > 0 && RobotMap::elevatorElevatorTopLimit->Get()){
+		RobotMap::elevatorElevatorTalon->Set(0.0);
+	}else{
+		RobotMap::elevatorElevatorTalon->Set(joystickY);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
