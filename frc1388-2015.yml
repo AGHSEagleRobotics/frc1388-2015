@@ -205,13 +205,23 @@ Children:
   - Children: []
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
-        choices: ['0', '1', '2', '3', '4', '5']
+        choices: &id006 ['0', '1', '2', '3', '4', '5']
         default: 1
         name: Number
-        validators: [Joystick]
+        validators: &id007 [Joystick]
         value: '1'
     Base: Joystick
-    Name: OpStick
+    Name: driveStick
+  - Children: []
+    Properties:
+      Number: !!robotbuilder.data.properties.ChoicesProperty
+        choices: *id006
+        default: 1
+        name: Number
+        validators: *id007
+        value: '2'
+    Base: Joystick
+    Name: opStick
   Properties: {}
   Base: OI
   Name: Operator Interface
