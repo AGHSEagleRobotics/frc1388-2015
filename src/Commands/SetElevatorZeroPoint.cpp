@@ -11,6 +11,8 @@
 
 #include "SetElevatorZeroPoint.h"
 
+
+
 SetElevatorZeroPoint::SetElevatorZeroPoint() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -22,22 +24,31 @@ SetElevatorZeroPoint::SetElevatorZeroPoint() {
 
 // Called just before this Command runs the first time
 void SetElevatorZeroPoint::Initialize() {
-	
+	isLimitAlreadyHit = RobotMap::elevatorElevatorTopLimit->Get();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void SetElevatorZeroPoint::Execute() {
+void SetElevatorZeroPoint::Execute(){
+	float joystickY = Robot::oi->getOpStickY();
 	
+	if(isLimitAlreadyHit){
+		RobotMap::elevatorElevatorTalon->Set(0.0);
+	}else{
+		RobotMap::elevatorElevatorTalon->Set(joystickY);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool SetElevatorZeroPoint::IsFinished() {
+	if(RobotMap::elevatorElevatorTopLimit->Get()){
+		return true;
+	}
 	return false;
 }
 
 // Called once after isFinished returns true
 void SetElevatorZeroPoint::End() {
-	
+	RobotMap::elevatorElevatorEncoder->Reset();
 }
 
 // Called when another command which requires one or more of the same
