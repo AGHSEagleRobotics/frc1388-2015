@@ -38,7 +38,7 @@ void RobotMap::init() {
 	
 	elevatorElevatorEncoder = new Encoder(0, 1, false, Encoder::k4X);
 	lw->AddSensor("Elevator", "ElevatorEncoder", elevatorElevatorEncoder);
-	elevatorElevatorEncoder->SetDistancePerPulse(1.0);
+	elevatorElevatorEncoder->SetDistancePerPulse(0.1388);
         elevatorElevatorEncoder->SetPIDSourceParameter(Encoder::kRate);
 	elevatorElevatorTopLimit = new DigitalInput(2);
 	lw->AddSensor("Elevator", "ElevatorTopLimit", elevatorElevatorTopLimit);

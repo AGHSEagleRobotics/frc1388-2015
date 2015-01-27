@@ -15,6 +15,7 @@
 #include "SmartDashboard/SmartDashboard.h"
 #include "Commands/AutonomousCommand.h"
 #include "Commands/Drive.h"
+#include "Commands/GoToPickup.h"
 #include "Commands/MoveElevator.h"
 #include "Commands/MoveGrabbers.h"
 #include "Commands/SetElevatorZeroPoint.h"

@@ -32,7 +32,7 @@ Children:
           validators: [DigitalChannel]
           value: '0'
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
-          name: Distance Per Pulse, validators: null, value: 1.0}
+          name: Distance Per Pulse, validators: null, value: 0.1388}
         PID Source: !!robotbuilder.data.properties.ChoicesProperty
           choices: [kDistance, kRate]
           default: kRate
@@ -198,48 +198,6 @@ Children:
         name: Default Command, type: Command, validators: null, value: Drive}
     Base: Subsystem
     Name: DriveTrain
-  - Children:
-    - Children: []
-      Properties:
-        Type: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id003
-          default: Talon
-          name: Type
-          validators: null
-          value: Talon
-        Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id004
-          default: '0'
-          name: Output Channel (PWM)
-          validators: *id005
-          value: '4'
-      Base: Speed Controller
-      Name: Grabbermotor
-    - Children: []
-      Properties:
-        Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
-          default: '0'
-          name: Input Channel (Digital)
-          validators: *id002
-          value: '6'
-      Base: Limit Switch
-      Name: Grabberoutsidelimit
-    - Children: []
-      Properties:
-        Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
-          default: '0'
-          name: Input Channel (Digital)
-          validators: *id002
-          value: '4'
-      Base: Limit Switch
-      Name: Grabberinsidelimit
-    Properties:
-      Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Default Command, type: Command, validators: null, value: None}
-    Base: Subsystem
-    Name: Grabbers
   Properties: {}
   Base: Subsystems
   Name: Subsystems
@@ -303,18 +261,17 @@ Children:
   - Children: []
     Properties:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Requires, type: Subsystem, validators: null, value: Grabbers}
+        name: Requires, type: Subsystem, validators: null, value: Elevator}
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
-        name: Button on SmartDashboard, validators: null, value: true}
+        name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
-    Name: MoveGrabbers
+    Name: GoToPickup
   Properties: {}
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Eagle
-      Robotics\workspace', extension: null, folder: true, name: Eclipse Workspace,
-    validators: null, value: ..\}
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Joey\workspace',
+    extension: null, folder: true, name: Eclipse Workspace, validators: null, value: 'C:\EagleRobotics1388\workspace'}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
   Java Package: !!robotbuilder.data.properties.StringProperty {default: org.usfirst.frc0000,
