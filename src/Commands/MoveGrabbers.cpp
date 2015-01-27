@@ -28,6 +28,23 @@ void MoveGrabbers::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void MoveGrabbers::Execute() {
 	
+	float opStickX = Robot::oi->getDriveStickX();
+
+	if(Robot::grabbers->grabberinsidelimit->Get() == 0 &&
+		Robot::grabbers->grabberoutsidelimit->Get() == 0)
+	{
+			Robot::grabbers->grabbermotor->Set(Robot::oi->getopStick()->GetX());
+	};
+
+	if(Robot::grabbers->grabberinsidelimit->Get() == 0 && opStickX > 0)
+	{
+		Robot::grabbers->grabbermotor->Set(0.0);
+	}
+	if(Robot::grabbers->grabberoutsidelimit->Get() == 0 && opStickX < 0)
+	{
+		Robot::grabbers->grabbermotor->Set(0.0);
+	}
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
