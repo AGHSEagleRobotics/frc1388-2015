@@ -12,7 +12,7 @@
 #include "GoToPickup.h"
 #include "GoToSetpoint.h"
 
-GoToSetpoint pickup(1.0);
+GoToSetpoint pickup(3.5);
 
 GoToPickup::GoToPickup() {
 	// Use requires() here to declare subsystem dependencies
