@@ -2,3 +2,4 @@
 *.html
 /Debug/
 GitVersion.h
+/.settings
