@@ -27,7 +27,19 @@ void GrabbersToOpen::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void GrabbersToOpen::Execute() {
+	if(Robot::grabbers->grabberinsidelimit->Get() == 1)
+	//when the inside limit is pressed
+	{
+		Robot::grabbers->grabbermotor->Set(1.0);
+		//then turn the motor on so the grabbers will move outward
+	}
 	
+	if(Robot::grabbers->grabberoutsidelimit->Get() == 1)
+	// if the outside limit is pressed
+	{
+		Robot::grabbers->grabbermotor->Set(0.0);
+		//then turn off the motor
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +49,6 @@ bool GrabbersToOpen::IsFinished() {
 
 // Called once after isFinished returns true
 void GrabbersToOpen::End() {
-	
 }
 
 // Called when another command which requires one or more of the same

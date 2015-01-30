@@ -23,6 +23,7 @@ SpeedController* RobotMap::driveTrainRightfronttalon = NULL;
 SpeedController* RobotMap::driveTrainLeftbacktalon = NULL;
 SpeedController* RobotMap::driveTrainRightbacktalon = NULL;
 RobotDrive* RobotMap::driveTrainRobotDrive41 = NULL;
+Encoder* RobotMap::driveTrainDriveencoder = NULL;
 SpeedController* RobotMap::grabbersGrabbermotor = NULL;
 DigitalInput* RobotMap::grabbersGrabberoutsidelimit = NULL;
 DigitalInput* RobotMap::grabbersGrabberinsidelimit = NULL;
@@ -67,6 +68,10 @@ void RobotMap::init() {
         driveTrainRobotDrive41->SetMaxOutput(1.0);
 
         driveTrainRobotDrive41->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
+	driveTrainDriveencoder = new Encoder(5, 7, false, Encoder::k4X);
+	lw->AddSensor("DriveTrain", "Driveencoder ", driveTrainDriveencoder);
+	driveTrainDriveencoder->SetDistancePerPulse(1.0);
+        driveTrainDriveencoder->SetPIDSourceParameter(Encoder::kRate);
 	grabbersGrabbermotor = new Talon(4);
 	lw->AddActuator("Grabbers", "Grabbermotor", (Talon*) grabbersGrabbermotor);
 	

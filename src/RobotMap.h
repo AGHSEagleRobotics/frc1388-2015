@@ -31,6 +31,7 @@ public:
 	static SpeedController* driveTrainLeftbacktalon;
 	static SpeedController* driveTrainRightbacktalon;
 	static RobotDrive* driveTrainRobotDrive41;
+	static Encoder* driveTrainDriveencoder;
 	static SpeedController* grabbersGrabbermotor;
 	static DigitalInput* grabbersGrabberoutsidelimit;
 	static DigitalInput* grabbersGrabberinsidelimit;

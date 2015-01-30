@@ -28,7 +28,7 @@ void MoveElevator::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void MoveElevator::Execute() {
 	float joystickY = Robot::oi->getOpStickY();
-
+//todo: move this code into the elevator subsystem and change the reset command so if the elevator stops in the middle because of an autonomous code mistake the elevator will still be able to zero itself.
 	if(joystickY < 0 && RobotMap::elevatorElevatorBottomLimit->Get()){
 		RobotMap::elevatorElevatorTalon->Set(0.0);
 	}else if(joystickY > 0 && RobotMap::elevatorElevatorTopLimit->Get()){
