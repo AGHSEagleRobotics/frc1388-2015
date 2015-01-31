@@ -22,41 +22,7 @@ ControlledDrive::ControlledDrive() {
 
 // Called just before this Command runs the first time
 void ControlledDrive::Initialize() {
-	float joystickX = Robot::oi->getDriveStickX();
-	float joystickY = Robot::oi->getDriveStickY();
-	float joystickZ = Robot::oi->getDriveStickZ();
-	if ( joystickY > 0)
-	{
-		if(Robot::driveTrain->driveencoder->GetRate() == 0)
-			{
-				Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0, 0.5, 0, 0);
-			}
-	}
-	if ( joystickY < 0)
-	{
-		if (Robot::driveTrain->driveencoder->GetRate() == 0)
-			{
-				Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian( 0, -0.5, 0, 0);
-			}
-	}
-	if ( joystickX > 0)
-	{
-		if(Robot::driveTrain->driveencoder->GetRate() == 0)
-			{
-				Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.5, 0, 0, 0);
-			}
-	}
-	if ( joystickX < 0)
-	{
-		if(Robot::driveTrain->driveencoder->GetRate() == 0)
-			{
-				Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(-0.5, 0, 0, 0);
-			}
-	}
-	if(Robot::driveTrain->driveencoder->GetRate() > 0 or Robot::driveTrain->driveencoder->GetRate() < 0)
-	{
-		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(joystickX, joystickY, joystickZ, 0);
-	}
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -68,29 +34,43 @@ void ControlledDrive::Execute() {
 		{
 			if(Robot::driveTrain->driveencoder->GetRate() == 0)
 				{
-					Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0, 0.5, 0, 0);
+					Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0, 0.25, 0, 0);
 				}
 		}
 		if ( joystickY < 0)
 		{
 			if (Robot::driveTrain->driveencoder->GetRate() == 0)
 				{
-					Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian( 0, -0.5, 0, 0);
+					Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian( 0, -0.25, 0, 0);
 				}
 		}
 		if ( joystickX > 0)
 		{
 			if(Robot::driveTrain->driveencoder->GetRate() == 0)
 				{
-					Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.5, 0, 0, 0);
+					Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.25, 0, 0, 0);
 				}
 		}
 		if ( joystickX < 0)
 		{
 			if(Robot::driveTrain->driveencoder->GetRate() == 0)
 				{
-					Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(-0.5, 0, 0, 0);
+					Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(-0.25, 0, 0, 0);
 				}
+		}
+		if (joystickZ < 0)
+		{
+			if(Robot::driveTrain->driveencoder->GetRate() == 0)
+				{
+					Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0, 0, -0.25, 0);
+				}
+		if(joystickZ > 0)
+		{
+			if(Robot::driveTrain->driveencoder->GetRate() == 0)
+				{
+					Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0, 0, 0.25, 0);
+				}
+		}
 		}
 		if(Robot::driveTrain->driveencoder->GetRate() > 0 or Robot::driveTrain->driveencoder->GetRate() < 0)
 		{

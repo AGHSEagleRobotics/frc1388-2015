@@ -41,4 +41,15 @@ void Elevator::InitDefaultCommand() {
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+void Elevator::MotorRestrictions() {
+	if (Robot::elevator->elevatorTopLimit->Get() == true && Robot::oi->getOpStickY() > 0)
+	{
+		Robot::elevator->elevatorTalon->Set(0.0);
+	}
+
+	if(Robot::elevator->elevatorBottomLimit->Get() == true && Robot::oi->getOpStickY() < 0)
+	{
+		Robot::elevator->elevatorTalon->Set(0.0);
+	}
+}
 
