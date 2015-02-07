@@ -29,8 +29,11 @@ void MoveGrabbers::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void MoveGrabbers::Execute() {
 	
-	float opStickX = Robot::oi->getDriveStickX();
-
+	if(Robot::grabbers->grabberinsidelimit->Get() == false &&
+			Robot::grabbers->grabberoutsidelimit->Get() == false)
+	{
+	RobotMap::grabbersGrabberCANTalon->Set(Robot::oi->getDriveStickX());
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

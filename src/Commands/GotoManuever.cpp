@@ -21,7 +21,7 @@ GotoManuever::GotoManuever() {
 
 // Called just before this Command runs the first time
 void GotoManuever::Initialize() {
-	
+
 }
 
 // Called repeatedly when this Command is scheduled to run
