@@ -9,8 +9,8 @@
 // it from being updated in the future.
 
 
-#ifndef SETELEVATORZEROPOINT_H
-#define SETELEVATORZEROPOINT_H
+#ifndef SETSETPOINT_H
+#define SETSETPOINT_H
 
 
 #include "Commands/Subsystem.h"
@@ -21,14 +21,15 @@
  *
  * @author ExampleAuthor
  */
-class SetElevatorZeroPoint: public Command {
+class SetSetpoint: public Command {
 public:
-	SetElevatorZeroPoint();
+	SetSetpoint(float setpoint);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
 	virtual void End();
 	virtual void Interrupted();
+	float setpoint;
 };
 
 #endif
