@@ -47,7 +47,7 @@ bool SetElevatorZeroPoint::IsFinished() {
 
 // Called once after isFinished returns true
 void SetElevatorZeroPoint::End() {
-	RobotMap::elevatorElevatorEncoder->Reset();
+	RobotMap::elevatorElevatorTalon->SetPosition(0.0);
 }
 
 // Called when another command which requires one or more of the same

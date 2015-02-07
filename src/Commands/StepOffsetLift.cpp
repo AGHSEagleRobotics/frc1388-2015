@@ -29,7 +29,7 @@ void StepOffsetLift::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void StepOffsetLift::Execute() {
-	float currentHeight = RobotMap::elevatorElevatorEncoder->GetDistance();
+	float currentHeight = RobotMap::elevatorElevatorTalon->GetEncPosition();
 	GoToSetpoint StepLift((currentHeight + 2.2));
 	StepLift.goToSetpoint();
 }

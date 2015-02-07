@@ -30,14 +30,14 @@ void GrabbersToOpen::Execute() {
 	if(Robot::grabbers->grabberinsidelimit->Get() == 1)
 	//when the inside limit is pressed
 	{
-		Robot::grabbers->grabbermotor->Set(1.0);
+		RobotMap::grabbersGrabberCANTalon->Set(1.0);
 		//then turn the motor on so the grabbers will move outward
 	}
 	
 	if(Robot::grabbers->grabberoutsidelimit->Get() == 1)
 	// if the outside limit is pressed
 	{
-		Robot::grabbers->grabbermotor->Set(0.0);
+		RobotMap::grabbersGrabberCANTalon->Set(0.0);
 		//then turn off the motor
 	}
 }

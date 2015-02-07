@@ -27,7 +27,7 @@ void PlatformOffsetLift::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void PlatformOffsetLift::Execute() {
-	float currentHeight = RobotMap::elevatorElevatorEncoder->GetDistance();
+	float currentHeight = RobotMap::elevatorElevatorTalon->GetEncPosition();
 	GoToSetpoint PlatLift((currentHeight + 4));
 	PlatLift.goToSetpoint();
 }

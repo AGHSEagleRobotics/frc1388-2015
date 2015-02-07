@@ -29,7 +29,7 @@ void MoveGrabbers::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void MoveGrabbers::Execute() {
-	ModifiedDriveStickX = (Robot::oi->getDriveStickX() * 5);
+	float ModifiedDriveStickX = (Robot::oi->getDriveStickX() * 5);
 	if(Robot::grabbers->grabberinsidelimit->Get() == false &&
 			Robot::grabbers->grabberoutsidelimit->Get() == false)
 	{
