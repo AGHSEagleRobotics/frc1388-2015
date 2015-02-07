@@ -233,22 +233,6 @@ Children:
   - Children:
     - Children: []
       Properties:
-        Type: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id003
-          default: Talon
-          name: Type
-          validators: null
-          value: TalonSRX
-        Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id004
-          default: '0'
-          name: Output Channel (PWM)
-          validators: *id005
-          value: '4'
-      Base: Speed Controller
-      Name: Grabbermotor
-    - Children: []
-      Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id001
           default: '0'

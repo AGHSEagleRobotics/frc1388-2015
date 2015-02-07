@@ -11,6 +11,7 @@
 
 #include "MoveGrabbers.h"
 #include "../OI.h"
+#include "math.h"
 
 MoveGrabbers::MoveGrabbers() {
 	// Use requires() here to declare subsystem dependencies
@@ -28,11 +29,14 @@ void MoveGrabbers::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void MoveGrabbers::Execute() {
-	
+	ModifiedDriveStickX = (Robot::oi->getDriveStickX() * 5);
 	if(Robot::grabbers->grabberinsidelimit->Get() == false &&
 			Robot::grabbers->grabberoutsidelimit->Get() == false)
 	{
-	RobotMap::grabbersGrabberCANTalon->Set(Robot::oi->getDriveStickX());
+	RobotMap::grabbersGrabberCANTalon->Set(
+			RobotMap::grabbersGrabberCANTalon->Get() + ModifiedDriveStickX);
+
+
 	}
 }
 
