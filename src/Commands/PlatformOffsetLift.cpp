@@ -28,6 +28,7 @@ void PlatformOffsetLift::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void PlatformOffsetLift::Execute() {
 	float currentHeight = RobotMap::elevatorElevatorTalon->GetEncPosition();
+	// 4 = height difference between scoring platform and step
 	GoToSetpoint PlatLift((currentHeight + 4));
 	PlatLift.goToSetpoint();
 }

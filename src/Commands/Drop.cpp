@@ -32,6 +32,7 @@ void Drop::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool Drop::IsFinished() {
+	//TODO: set TimedOut
 	return IsTimedOut();
 }
 

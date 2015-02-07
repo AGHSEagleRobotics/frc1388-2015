@@ -30,6 +30,7 @@ void ControlledDrive::Execute() {
 	float joystickX = Robot::oi->getDriveStickX();
 	float joystickY = Robot::oi->getDriveStickY();
 	float joystickZ = Robot::oi->getDriveStickZ();
+	//TODO: Fix diagonal control movement
 		if ( joystickY > 0)
 		{
 			if(Robot::driveTrain->driveencoder->GetRate() == 0)

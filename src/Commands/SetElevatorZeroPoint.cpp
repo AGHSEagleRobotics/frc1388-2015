@@ -24,6 +24,7 @@ SetElevatorZeroPoint::SetElevatorZeroPoint() {
 
 // Called just before this Command runs the first time
 void SetElevatorZeroPoint::Initialize() {
+	//TODO: change to CANTalon function
 	isLimitAlreadyHit = RobotMap::elevatorElevatorBottomLimit->Get();
 }
 
@@ -39,6 +40,7 @@ void SetElevatorZeroPoint::Execute(){
 
 // Make this return true when this Command no longer needs to run execute()
 bool SetElevatorZeroPoint::IsFinished() {
+	//TODO: use isLimitAlreadyHit more
 	if(RobotMap::elevatorElevatorBottomLimit->Get()){
 		return true;
 	}
