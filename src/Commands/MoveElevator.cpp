@@ -10,6 +10,7 @@
 
 
 #include "MoveElevator.h"
+#include "GoToSetpoint.h"
 
 MoveElevator::MoveElevator() {
 	// Use requires() here to declare subsystem dependencies
@@ -27,6 +28,25 @@ void MoveElevator::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void MoveElevator::Execute() {
+	//This first part is basically an event listener for the POV (D-Pad) of the controller
+
+	signed int pov = Robot::oi->getopStick()->GetPOV();
+	float currentPosition = RobotMap::elevatorElevatorTalon->GetEncPosition();
+	GoToSetpoint StepLift((currentPosition + 4.1987)); //That magic number is the difference in height between the platform and step
+	GoToSetpoint SetDown((currentPosition - 2.2)); //2.2 is the amount above the already stacked tote that the elevator will be
+
+	switch(pov){
+	case 0:
+
+		StepLift.goToSetpoint();
+		break;
+	case 4:
+		SetDown.goToSetpoint();
+		break;
+	}
+
+	//This part is for actually moving the elevator manually with a joystick
+
 	float joystickY = Robot::oi->getOpStickY();
 
 	if(RobotMap::elevatorElevatorTalon->IsFwdLimitSwitchClosed() && joystickY > 0){
