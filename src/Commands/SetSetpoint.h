@@ -29,7 +29,7 @@ public:
 	virtual bool IsFinished();
 	virtual void End();
 	virtual void Interrupted();
-	float setpoint;
+	float m_setpoint;
 };
 
 #endif
