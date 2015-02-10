@@ -10,9 +10,6 @@
 
 
 #include "GoToPickup.h"
-#include "GoToSetpoint.h"
-
-GoToSetpoint pickup(3.5);
 
 GoToPickup::GoToPickup() {
 	// Use requires() here to declare subsystem dependencies
@@ -25,17 +22,17 @@ GoToPickup::GoToPickup() {
 
 // Called just before this Command runs the first time
 void GoToPickup::Initialize() {
-
+	
 }
 
 // Called repeatedly when this Command is scheduled to run
 void GoToPickup::Execute() {
-	pickup.goToSetpoint();
+	
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool GoToPickup::IsFinished() {
-	return true;
+	return false;
 }
 
 // Called once after isFinished returns true
