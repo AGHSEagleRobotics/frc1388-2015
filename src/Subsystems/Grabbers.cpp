@@ -41,4 +41,13 @@ void Grabbers::InitDefaultCommand() {
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
-
+void Grabbers::ResetEncoder(){
+	if(Robot::grabbers->grabberoutsidelimit->Get() == false)
+			{
+				RobotMap::grabbersGrabberCANTalon->Set(INFINITE_ERROR);
+			}
+	else if(Robot::grabbers->grabberoutsidelimit->Get() == true)
+			{
+				RobotMap::grabbersGrabberCANTalon->SetPosition(0);
+			}
+}

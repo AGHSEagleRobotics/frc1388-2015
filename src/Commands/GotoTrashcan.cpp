@@ -22,7 +22,7 @@ GotoTrashcan::GotoTrashcan() {
 
 // Called just before this Command runs the first time
 void GotoTrashcan::Initialize() {
-	
+	RobotMap::grabbersGrabberCANTalon->Set(TRASHCAN_WIDTH);
 }
 
 // Called repeatedly when this Command is scheduled to run

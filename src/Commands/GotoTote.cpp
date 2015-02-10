@@ -10,6 +10,7 @@
 
 
 #include "GotoTote.h"
+#include "../Subsystems/Grabbers.h"
 
 GotoTote::GotoTote() {
 	// Use requires() here to declare subsystem dependencies
@@ -22,7 +23,7 @@ GotoTote::GotoTote() {
 
 // Called just before this Command runs the first time
 void GotoTote::Initialize() {
-	
+	RobotMap::grabbersGrabberCANTalon->Set(WIDETOTE_WIDTH);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -37,7 +38,6 @@ bool GotoTote::IsFinished() {
 
 // Called once after isFinished returns true
 void GotoTote::End() {
-	
 }
 
 // Called when another command which requires one or more of the same

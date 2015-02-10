@@ -80,6 +80,7 @@ void Robot::TeleopInit() {
 	// these lines or comment it out.
 	if (autonomousCommand != NULL)
 		autonomousCommand->Cancel();
+	Robot::grabbers->ResetEncoder();
 }
 
 void Robot::TeleopPeriodic() {

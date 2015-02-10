@@ -10,6 +10,7 @@
 
 
 #include "GrabbersToOpen.h"
+#include "../Subsystems/Grabbers.h"
 
 GrabbersToOpen::GrabbersToOpen() {
 	// Use requires() here to declare subsystem dependencies
@@ -22,24 +23,12 @@ GrabbersToOpen::GrabbersToOpen() {
 
 // Called just before this Command runs the first time
 void GrabbersToOpen::Initialize() {
-	
+	//TODO:turn this command into a command that can go to open from any position
 }
 
 // Called repeatedly when this Command is scheduled to run
 void GrabbersToOpen::Execute() {
-	if(Robot::grabbers->grabberinsidelimit->Get() == 1)
-	//when the inside limit is pressed
-	{
-		RobotMap::grabbersGrabberCANTalon->Set(1.0);
-		//then turn the motor on so the grabbers will move outward
-	}
-	
-	if(Robot::grabbers->grabberoutsidelimit->Get() == 1)
-	// if the outside limit is pressed
-	{
-		RobotMap::grabbersGrabberCANTalon->Set(0.0);
-		//then turn off the motor
-	}
+	Robot::grabbers->ResetEncoder();
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -52,7 +41,7 @@ void GrabbersToOpen::End() {
 }
 
 // Called when another command which requires one or more of the same
-// subsystems is scheduled to run
+// substems is scheduled to run
 void GrabbersToOpen::Interrupted() {
 
 }
