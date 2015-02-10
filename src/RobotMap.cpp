@@ -88,7 +88,4 @@ void RobotMap::init() {
     grabbersGrabberCANTalon->SetPID(1,0.001,0);
     grabbersGrabberCANTalon->EnableControl();
     elevatorElevatorTalon = new CANTalon(13);
-    elevatorElevatorTalon->SetControlMode(CANSpeedController::kPosition);
-    elevatorElevatorTalon->SetPID(0.3, 0.0, 0.0);
-    elevatorElevatorTalon->EnableControl();
 }

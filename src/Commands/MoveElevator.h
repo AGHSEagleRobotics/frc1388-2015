@@ -22,6 +22,8 @@
  * @author ExampleAuthor
  */
 class MoveElevator: public Command {
+private:
+	bool isPositionControl;
 public:
 	MoveElevator();
 	virtual void Initialize();

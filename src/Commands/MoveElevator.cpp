@@ -10,7 +10,9 @@
 
 
 #include "MoveElevator.h"
-#include "GoToSetpoint.h"
+#define STEP_OFFSET 4.1987
+#define PLATFORM_SETDOWN -2.2
+#define JOYSTICK_SCALING 0.4
 
 MoveElevator::MoveElevator() {
 	// Use requires() here to declare subsystem dependencies
@@ -23,7 +25,7 @@ MoveElevator::MoveElevator() {
 
 // Called just before this Command runs the first time
 void MoveElevator::Initialize() {
-	
+	isPositionControl = true;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -32,29 +34,35 @@ void MoveElevator::Execute() {
 
 	signed int pov = Robot::oi->getopStick()->GetPOV();
 	float currentPosition = RobotMap::elevatorElevatorTalon->GetEncPosition();
-	GoToSetpoint StepLift((currentPosition + 4.1987)); //That magic number is the difference in height between the platform and step
-	GoToSetpoint SetDown((currentPosition - 2.2)); //2.2 is the amount above the already stacked tote that the elevator will be
 
 	switch(pov){
 	case 0:
-		StepLift.goToSetpoint();
+		RobotMap::elevatorElevatorTalon->Set((currentPosition + STEP_OFFSET));
 		break;
 	case 4:
-		SetDown.goToSetpoint();
+		RobotMap::elevatorElevatorTalon->Set((currentPosition + PLATFORM_SETDOWN));
 		break;
+	case 6:
+		isPositionControl = !isPositionControl;
+		if(isPositionControl){
+			Robot::elevator->elevatorTalon->SetControlMode(CANSpeedController::kPosition);
+		}else{
+			Robot::elevator->elevatorTalon->SetControlMode(CANSpeedController::kPercentVbus);
+		}
 	}
 
 	//This part is for actually moving the elevator manually with a joystick
 
 	float joystickY = Robot::oi->getOpStickY();
+	float scaledJoystickY = (joystickY * JOYSTICK_SCALING);
 
-	if(RobotMap::elevatorElevatorTalon->IsFwdLimitSwitchClosed() && joystickY > 0){
-		RobotMap::elevatorElevatorTalon->Set(0.0);
-	}else if(RobotMap::elevatorElevatorTalon->IsRevLimitSwitchClosed() && joystickY < 0){
-		RobotMap::elevatorElevatorTalon->Set(0.0);
+	if(isPositionControl){
+		if(joystickY != 0)
+			RobotMap::elevatorElevatorTalon->Set((currentPosition + scaledJoystickY));
 	}else{
-		RobotMap::elevatorElevatorTalon->Set(joystickY);
+		RobotMap::elevatorElevatorTalon->Set((joystickY));
 	}
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
