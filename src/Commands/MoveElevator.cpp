@@ -37,7 +37,6 @@ void MoveElevator::Execute() {
 
 	switch(pov){
 	case 0:
-
 		StepLift.goToSetpoint();
 		break;
 	case 4:
