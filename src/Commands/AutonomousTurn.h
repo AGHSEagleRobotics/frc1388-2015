@@ -9,8 +9,8 @@
 // it from being updated in the future.
 
 
-#ifndef AUTONOMOUS_COMMAND_H
-#define AUTONOMOUS_COMMAND_H
+#ifndef AUTONOMOUSTURN_H
+#define AUTONOMOUSTURN_H
 
 
 #include "Commands/Subsystem.h"
@@ -21,9 +21,9 @@
  *
  * @author ExampleAuthor
  */
-class AutonomousCommand: public Command {
+class AutonomousTurn: public Command {
 public:
-	AutonomousCommand();
+	AutonomousTurn(float);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

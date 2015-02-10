@@ -9,8 +9,8 @@
 // it from being updated in the future.
 
 
-#ifndef AUTONOMOUSMOVE_H
-#define AUTONOMOUSMOVE_H
+#ifndef AUTONOMOUSSTRAFE_H
+#define AUTONOMOUSSTRAFE_H
 
 
 #include "Commands/Subsystem.h"
@@ -21,16 +21,19 @@
  *
  * @author ExampleAuthor
  */
-class AutonomousMove: public Command {
-private:
-	float m_x, m_y, m_z;
+class AutonomousStrafe: public Command {
 public:
-	AutonomousMove(float x, float y, float z, float t);
+	AutonomousStrafe(float velocity, float time);
+	AutonomousStrafe(float distance);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
 	virtual void End();
 	virtual void Interrupted();
+private:
+	float m_velocity;
+	float m_distance;
+	bool isDistanceMove;
 };
 
 #endif
