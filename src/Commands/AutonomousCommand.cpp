@@ -10,9 +10,9 @@
 
 
 
-#include "AutonomousCommandGroup.h"
+#include "AutonomousCommand.h"
 
-AutonomousCommandGroup::AutonomousCommandGroup() {
+AutonomousCommand::AutonomousCommand() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

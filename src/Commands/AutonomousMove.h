@@ -9,8 +9,8 @@
 // it from being updated in the future.
 
 
-#ifndef AUTONOMOUSDROP_H
-#define AUTONOMOUSDROP_H
+#ifndef AUTONOMOUSMOVE_H
+#define AUTONOMOUSMOVE_H
 
 
 #include "Commands/Subsystem.h"
@@ -21,9 +21,9 @@
  *
  * @author ExampleAuthor
  */
-class AutonomousDrop: public Command {
+class AutonomousMove: public Command {
 public:
-	AutonomousDrop();
+	AutonomousMove();
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();

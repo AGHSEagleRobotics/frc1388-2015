@@ -9,26 +9,20 @@
 // it from being updated in the future.
 
 
-#ifndef GRAB_H
-#define GRAB_H
 
+#ifndef AUTONOMOUSCOMMAND_H
+#define AUTONOMOUSCOMMAND_H
 
-#include "Commands/Subsystem.h"
-#include "../Robot.h"
+#include "Commands/CommandGroup.h"
 
 /**
  *
  *
  * @author ExampleAuthor
  */
-class Grab: public Command {
-public:
-	Grab();
-	virtual void Initialize();
-	virtual void Execute();
-	virtual bool IsFinished();
-	virtual void End();
-	virtual void Interrupted();
+class AutonomousCommand: public CommandGroup {
+public:	
+	AutonomousCommand();
 };
 
 #endif
