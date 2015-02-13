@@ -1,11 +1,12 @@
 @echo off
-git log -1 --pretty="%%h" > git.tmp
-set /p VERSION=<git.tmp
-git status -z > git.tmp
-set /p STATUS=<git.tmp
-git tag --contains > git.tmp
-set /p TAG=<git.tmp
-del git.tmp
+set TMPFILE=src/GitVersion.h
+git log -1 --pretty="%%h" > %TMPFILE%
+set /p VERSION=<%TMPFILE%
+git status -z > %TMPFILE%
+set /p STATUS=<%TMPFILE%
+git tag --contains > %TMPFILE%
+set /p TAG=<%TMPFILE%
+pause
 echo //This file simply contains the git info of the code as set by gitversion.bat > src/GitVersion.h
 echo #define GIT_VERSION ^"%VERSION%^" >> src/GitVersion.h
 echo #define STATUS ^"%STATUS%^" >> src/GitVersion.h	
