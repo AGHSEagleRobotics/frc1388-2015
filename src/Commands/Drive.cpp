@@ -28,39 +28,41 @@ void Drive::Initialize() {
 }
 
 // Called repeatedly when this Command is scheduled to run
-void Drive::Execute() {
+void
+Drive::Execute() {
 	float joystickX		 	= Robot::oi->getDriveStickX();
 	float joystickY		 	= Robot::oi->getDriveStickY();
 	float joystickZ		 	= Robot::oi->getDriveStickZ();
 	float joystickAngle	 	= RobotMap::driveTrainGyro->GetAngleZ();
-//	float currentError   	= 0;
-	float m_desiredHeading	= 0;
-//	float rotSpeed		 = 0;
-//
-//	if (joystickZ != 0)
-//	{
-//		rotSpeed = joystickZ;
-//		m_rotationState = 1;
-//	}
-//	else if(m_rotationState && RobotMap::driveTrainGyro->GetRateZ() < 20) //TODO: define "20" so it is not a magic number. We might want to use a different number as well
-//	{
-//		m_desiredAngle = RobotMap::driveTrainGyro->GetNormalizedAngleZ();
-//		m_rotationState = 0;
-//	}
-//	else
-//	{
-//
-//	}
-		// state 3: reached desired heading lock us here
-	//take the error
+	float currentError   	= 0;
+	float rotSpeed		 = 0;
 
-	Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(joystickX, joystickY, joystickZ, joystickAngle);
-
-	if(Robot::oi->getdriveStick()->GetRawButton(2) == true)
+	if (joystickZ != 0)
+		{
+			rotSpeed = joystickZ;
+			m_rotationState = 1;
+		}
+	else if(m_rotationState && RobotMap::driveTrainGyro->GetRateZ() < 20) //TODO: define "20" so it is not a magic number. We might want to use a different number as well
+		{
+			m_desiredAngle = RobotMap::driveTrainGyro->GetNormalizedAngleZ();
+			m_rotationState = 0;
+		}
+	if (joystickAngle > m_desiredAngle)
+		{
+			Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0, 0, -0.5, joystickAngle);
+		}
+	if (joystickAngle < m_desiredAngle)
+		{
+			Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0, 0, 0.5, joystickAngle);
+		}
+	if(joystickAngle == m_desiredAngle)
 	{
-		RobotMap::driveTrainGyro->Reset();
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(joystickX, joystickY, joystickZ, joystickAngle);
+		if(Robot::oi->getdriveStick()->GetRawButton(2) == true)
+		{
+			RobotMap::driveTrainGyro->Reset();
+		}
 	}
-
 }
 
 
