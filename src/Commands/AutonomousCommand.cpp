@@ -12,10 +12,7 @@
 
 #include "AutonomousCommand.h"
 
-AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) {
-
-	command = commandInput;
-
+AutonomousCommand::AutonomousCommand() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
@@ -32,5 +29,4 @@ AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) 
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-
 }

@@ -24,7 +24,7 @@
 class AutonomousStrafe: public Command {
 public:
 	AutonomousStrafe(float velocity, float time);
-
+	AutonomousStrafe(float distance);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
@@ -32,7 +32,8 @@ public:
 	virtual void Interrupted();
 private:
 	float m_velocity;
-
+	float m_distance;
+	bool isDistanceMove;
 };
 
 #endif
