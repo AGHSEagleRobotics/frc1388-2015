@@ -22,7 +22,10 @@
  */
 class AutonomousCommand: public CommandGroup {
 public:	
-	AutonomousCommand();
+	AutonomousCommand(int type);
+private:
+	int m_typeAutonomous;
 };
+
 
 #endif

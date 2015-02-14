@@ -31,6 +31,8 @@ public:
 	virtual void Interrupted();
 private:
 	float m_angle;
+	float goal;
+	float gyro;
 };
 
 #endif

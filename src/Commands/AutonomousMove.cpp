@@ -8,8 +8,11 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
+#include "RobotMap.h"
 #include "AutonomousMove.h"
+#include "ITG3200.h"
+#define DIST_VELOCITY 0.5
+
 
 AutonomousMove::AutonomousMove(float velocity, float time) {
 	// Use requires() here to declare subsystem dependencies
@@ -36,14 +39,27 @@ AutonomousMove::AutonomousMove(float distance) {
 
 // Called just before this Command runs the first time
 void AutonomousMove::Initialize() {
+	if (isDistanceMove)
 	m_distance += RobotMap::driveTrainDriveencoder->Get();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void AutonomousMove::Execute() {
-	float Gyro = RobotMap::driveTrainGyro->GetNormalizedAngleZ();
-//	RobotMap::driveTrainDriveencoder->Get()
-	Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, m_velocity, 0.0, Gyro);
+	float Gyro = RobotMap::driveTrainGyro->GetAngleZ();
+	Gyro %= 360;
+
+
+//	RobotMap::driveTrainDriveencoder->Get();
+
+	if (isDistanceMove && m_distance > 0){
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, DIST_VELOCITY, 0.0, Gyro);
+	}
+	else if (isDistanceMove && m_distance < 0){
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, -DIST_VELOCITY, 0.0, Gyro);
+	}
+	else if (!isDistanceMove){
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, m_velocity, 0.0, Gyro);
+	}
 	// TODO: Gyro
 
 }

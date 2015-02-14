@@ -12,7 +12,10 @@
 
 #include "AutonomousCommand.h"
 
-AutonomousCommand::AutonomousCommand() {
+AutonomousCommand::AutonomousCommand(int type) {
+
+	 m_typeAutonomous = type;
+
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
@@ -29,4 +32,5 @@ AutonomousCommand::AutonomousCommand() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
+
 }
