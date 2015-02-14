@@ -23,6 +23,7 @@ private:
 	JoystickButton* grabSlimTote;
 	JoystickButton* openGrabbers;
 	Joystick* driveStick;
+	JoystickButton* zeroElevator;
 	JoystickButton* gyroReset;
 	JoystickButton* controldrivebutton;
 
