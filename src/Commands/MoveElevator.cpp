@@ -26,6 +26,7 @@ MoveElevator::MoveElevator() {
 // Called just before this Command runs the first time
 void MoveElevator::Initialize() {
 	isPositionControl = true;
+	m_povPrevState = 42069; //Scott picked this "magic" number
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -34,15 +35,17 @@ void MoveElevator::Execute() {
 
 	signed int pov = Robot::oi->getopStick()->GetPOV();
 	float currentPosition = RobotMap::elevatorElevatorTalon->GetEncPosition();
-
 	switch(pov){
-	case 0:
+	case 0: // Toe dough edge detection
 		RobotMap::elevatorElevatorTalon->Set((currentPosition + STEP_OFFSET));
 		break;
-	case 4:
+	case 180:
 		RobotMap::elevatorElevatorTalon->Set((currentPosition + PLATFORM_SETDOWN));
 		break;
-	case 6:
+	case 270:
+		if (m_povPrevState == 270)
+			break;
+		printf("isPositionControl: %d\n", isPositionControl);
 		isPositionControl = !isPositionControl;
 		if(isPositionControl){
 			Robot::elevator->elevatorTalon->SetControlMode(CANSpeedController::kPosition);
@@ -51,10 +54,13 @@ void MoveElevator::Execute() {
 		}
 	}
 
+	m_povPrevState = pov;
+
 	//This part is for actually moving the elevator manually with a joystick
 
 	float joystickY = Robot::oi->getOpStickY();
 	float scaledJoystickY = (joystickY * JOYSTICK_SCALING);
+	printf("pov: %d joystickY: %f\n", pov, joystickY);
 
 	if(isPositionControl){
 		if(joystickY != 0)
