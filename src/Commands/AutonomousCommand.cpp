@@ -12,9 +12,9 @@
 
 #include "AutonomousCommand.h"
 
-AutonomousCommand::AutonomousCommand(int type) {
+AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) {
 
-	 m_typeAutonomous = type;
+	command = commandInput;
 
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());

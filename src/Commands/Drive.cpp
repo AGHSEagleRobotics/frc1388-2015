@@ -34,7 +34,7 @@ void Drive::Execute() {
 	float joystickZ		 	= Robot::oi->getDriveStickZ();
 	float joystickAngle	 	= RobotMap::driveTrainGyro->GetAngleZ();
 //	float currentError   	= 0;
-	float m_desiredHeading	= 0;
+//	float m_desiredHeading	= 0;
 //	float rotSpeed		 = 0;
 //
 //	if (joystickZ != 0)

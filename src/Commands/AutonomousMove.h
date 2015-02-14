@@ -12,7 +12,7 @@
 #ifndef AUTONOMOUSMOVE_H
 #define AUTONOMOUSMOVE_H
 
-
+#include "../RobotMap.h"
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
 

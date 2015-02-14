@@ -8,7 +8,6 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-#include "RobotMap.h"
 #include "AutonomousMove.h"
 #include "ITG3200.h"
 #define DIST_VELOCITY 0.5
@@ -45,7 +44,7 @@ void AutonomousMove::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void AutonomousMove::Execute() {
-	float Gyro = RobotMap::driveTrainGyro->GetAngleZ();
+	int Gyro = RobotMap::driveTrainGyro->GetAngleZ();
 	Gyro %= 360;
 
 
