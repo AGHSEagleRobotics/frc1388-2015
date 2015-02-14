@@ -13,6 +13,7 @@
 #define DRIVETRAIN_H
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
+#include "ITG3200.h"
 
 /**
  *
