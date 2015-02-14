@@ -42,6 +42,7 @@ public:
 	Grabbers();
 	void InitDefaultCommand();
 	void ResetEncoder();
+	void HardLimits();
 };
 
 #endif

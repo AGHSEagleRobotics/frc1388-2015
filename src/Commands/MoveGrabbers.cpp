@@ -36,18 +36,6 @@ void MoveGrabbers::Execute() {
 	RobotMap::grabbersGrabberCANTalon->Set(
 			RobotMap::grabbersGrabberCANTalon->Get() + ModifiedDriveStickX);
 	}
-	if(Robot::grabbers->grabberinsidelimit->Get() ==  false &&
-			Robot::grabbers->grabberoutsidelimit->Get() == true)
-	{
-		RobotMap::grabbersGrabberCANTalon->Set(
-			abs(RobotMap::grabbersGrabberCANTalon->Get() + ModifiedDriveStickX) * (NEGATIVE_VALUE));
-	}
-	if(Robot::grabbers->grabberinsidelimit->Get() == true &&
-			Robot::grabbers->grabberoutsidelimit->Get() == false)
-	{
-		RobotMap::grabbersGrabberCANTalon->Set(
-				abs(RobotMap::grabbersGrabberCANTalon->Get() + ModifiedDriveStickX));
-	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -42,12 +42,24 @@ void Grabbers::InitDefaultCommand() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 void Grabbers::ResetEncoder(){
-	if(Robot::grabbers->grabberoutsidelimit->Get() == false)
+	if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed() == false)
 			{
 				RobotMap::grabbersGrabberCANTalon->Set(INFINITE_ERROR);
 			}
-	else if(Robot::grabbers->grabberoutsidelimit->Get() == true)
+	else if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed() == true)
 			{
 				RobotMap::grabbersGrabberCANTalon->SetPosition(0);
 			}
+}
+void Grabbers::HardLimits(){
+	if (RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed() == true &&
+			Robot::oi->driveStick->GetY() < 0)
+	{
+		RobotMap::grabbersGrabberCANTalon->Set(0.0);
+	}
+	if (RobotMap::grabbersGrabberCANTalon->IsRevLimitSwitchClosed() == true &&
+			Robot::oi->driveStick->GetY() > 0)
+	{
+		RobotMap::grabbersGrabberCANTalon->Set(0.0);
+	}
 }
