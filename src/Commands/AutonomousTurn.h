@@ -23,12 +23,14 @@
  */
 class AutonomousTurn: public Command {
 public:
-	AutonomousTurn(float);
+	AutonomousTurn(float angle);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
 	virtual void End();
 	virtual void Interrupted();
+private:
+	float m_angle;
 };
 
 #endif

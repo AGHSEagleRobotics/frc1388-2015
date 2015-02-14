@@ -12,6 +12,7 @@
 #ifndef ROBOTMAP_H
 #define ROBOTMAP_H
 #include "WPILib.h"
+#include "ITG3200.h"
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -40,5 +41,6 @@ public:
 	static CANTalon* grabbersGrabberCANTalon;
 	static void init();
 	static CANTalon* elevatorElevatorTalon;
+	static ITG3200* driveTrainGyro;
 };
 #endif

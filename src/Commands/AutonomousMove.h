@@ -23,12 +23,20 @@
  */
 class AutonomousMove: public Command {
 public:
-	AutonomousMove();
+	AutonomousMove(float velocity, float time);
+	AutonomousMove(float distance);
 	virtual void Initialize();
 	virtual void Execute();
 	virtual bool IsFinished();
 	virtual void End();
 	virtual void Interrupted();
+private:
+	float m_velocity;
+	float m_distance;
+	float m_time;
+	bool isDistanceMove;
+
 };
 
 #endif
+
