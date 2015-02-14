@@ -23,17 +23,17 @@ GrabbersToOpen::GrabbersToOpen() {
 
 // Called just before this Command runs the first time
 void GrabbersToOpen::Initialize() {
-	//TODO:turn this command into a command that can go to open from any position
+	Robot::grabbers->ResetEncoder();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void GrabbersToOpen::Execute() {
-	Robot::grabbers->ResetEncoder();
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool GrabbersToOpen::IsFinished() {
-	return false;
+	return true;
 }
 
 // Called once after isFinished returns true

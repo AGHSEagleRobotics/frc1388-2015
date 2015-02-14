@@ -15,6 +15,7 @@
 
 #include "Commands/Subsystem.h"
 #include "../Robot.h"
+#include "ITG3200.h"
 
 /**
  *
@@ -22,6 +23,9 @@
  * @author ExampleAuthor
  */
 class Drive: public Command {
+private:
+	float m_desiredAngle;
+	char m_rotationState;
 public:
 	Drive();
 	virtual void Initialize();

@@ -3,6 +3,7 @@
 	<name>frc1388-2015</name>
 	<comment></comment>
 	<projects>
+		<project>AVRSBIN1_lib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
