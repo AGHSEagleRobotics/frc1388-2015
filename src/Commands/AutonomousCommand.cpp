@@ -11,8 +11,53 @@
 
 
 #include "AutonomousCommand.h"
+#include "SetElevatorZeroPoint.h"
+#include "AutonomousMove.h"
+#include "GotoTote.h"
+#include "GotoSlimTote.h"
+#include "AutonomousStrafe.h"
+#include "SetSetpoint.h"
+#include "AutonomousTurn.h"
+#include "GrabberstoOpen.h"
+#include "GotoTrashcan.h"
 
-AutonomousCommand::AutonomousCommand() {
+#define ROBOT_SET_DISTANCE 60
+#define ELEVATOR_MOVE_HEIGHT 30 //somewhat random numbers picked, need refining
+#define TOTE_SET_DISTANCE 110
+
+AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) {
+
+	command = commandInput;
+	AddSequential(new SetElevatorZeroPoint());
+
+	switch (commandInput){
+	case RobotSet:
+		AddSequential(new AutonomousMove(ROBOT_SET_DISTANCE));
+		break;
+	case ToteSet:
+		//AddSequential(new GrabbersToOpen());
+		AddSequential(new GotoTote());
+		AddSequential(new SetSetpoint(ELEVATOR_MOVE_HEIGHT));
+		AddSequential(new AutonomousTurn(90));
+		AddSequential(new AutonomousMove(TOTE_SET_DISTANCE));
+		AddSequential(new SetSetpoint(0.0));
+		AddSequential(new GrabbersToOpen());
+		break;
+	case ContainerSet:
+		AddSequential(new GotoTrashcan());
+		AddSequential(new SetSetpoint(ELEVATOR_MOVE_HEIGHT));
+		AddSequential(new AutonomousTurn(90));
+		AddSequential(new AutonomousMove(TOTE_SET_DISTANCE));
+		AddSequential(new SetSetpoint(0.0));
+		AddSequential(new GrabbersToOpen());
+		break;
+	case StepAttack:
+
+		break;
+	case StackedToteSet:
+
+		break;
+	}
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
@@ -29,4 +74,5 @@ AutonomousCommand::AutonomousCommand() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
+
 }

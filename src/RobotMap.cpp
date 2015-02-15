@@ -66,8 +66,8 @@ void RobotMap::init() {
         driveTrainRobotDrive41->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
 	driveTrainDriveencoder = new Encoder(5, 7, false, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "Driveencoder ", driveTrainDriveencoder);
-	driveTrainDriveencoder->SetDistancePerPulse(1.0);
-        driveTrainDriveencoder->SetPIDSourceParameter(Encoder::kRate);
+	driveTrainDriveencoder->SetDistancePerPulse(0.05027);
+        driveTrainDriveencoder->SetPIDSourceParameter(Encoder::kDistance);
 	grabbersGrabberoutsidelimit = new DigitalInput(6);
 	lw->AddSensor("Grabbers", "Grabberoutsidelimit", grabbersGrabberoutsidelimit);
 	

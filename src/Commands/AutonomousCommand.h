@@ -21,8 +21,19 @@
  * @author ExampleAuthor
  */
 class AutonomousCommand: public CommandGroup {
-public:	
-	AutonomousCommand();
+public:
+	enum Command_t{
+		RobotSet,
+		ToteSet,
+		ContainerSet,
+		StackedToteSet,
+		StepAttack
+	};
+	AutonomousCommand(AutonomousCommand::Command_t commandInput=RobotSet);
+private:
+	Command_t command;
+
 };
+
 
 #endif
