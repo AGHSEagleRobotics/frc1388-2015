@@ -31,6 +31,7 @@ Elevator::Elevator() : Subsystem("Elevator") {
 	elevatorTalon->SetControlMode(CANSpeedController::kPosition);
 	elevatorTalon->SetPID(0.3, 0.0, 0.0);
 	elevatorTalon->EnableControl();
+	elevatorTalon->ConfigMaxOutputVoltage(4.0);
 }
     
 void Elevator::InitDefaultCommand() {

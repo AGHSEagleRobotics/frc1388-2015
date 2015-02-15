@@ -34,13 +34,16 @@ void MoveElevator::Execute() {
 	//This first part is basically an event listener for the POV (D-Pad) of the controller
 
 	signed int pov = Robot::oi->getopStick()->GetPOV();
-	float currentPosition = RobotMap::elevatorElevatorTalon->GetEncPosition();
+	int currentPosition = RobotMap::elevatorElevatorTalon->GetEncPosition();
+	int setpoint = 0;
 	switch(pov){
 	case 0: // Toe dough edge detection
-		RobotMap::elevatorElevatorTalon->Set((currentPosition + STEP_OFFSET));
+		setpoint = currentPosition + STEP_OFFSET;
+		RobotMap::elevatorElevatorTalon->Set(setpoint);
 		break;
 	case 180:
-		RobotMap::elevatorElevatorTalon->Set((currentPosition + PLATFORM_SETDOWN));
+		setpoint = currentPosition + PLATFORM_SETDOWN;
+		RobotMap::elevatorElevatorTalon->Set(setpoint);
 		break;
 	case 270:
 		if (m_povPrevState == 270)
@@ -60,15 +63,16 @@ void MoveElevator::Execute() {
 
 	float joystickY = Robot::oi->getOpStickY();
 	float scaledJoystickY = (joystickY * JOYSTICK_SCALING);
-	printf("pov: %d joystickY: %f\n", pov, joystickY);
 
 	if(isPositionControl){
-		if(joystickY != 0)
-			RobotMap::elevatorElevatorTalon->Set((currentPosition + scaledJoystickY));
+		setpoint = currentPosition + scaledJoystickY;
+
+		RobotMap::elevatorElevatorTalon->Set(setpoint);
 	}else{
-		RobotMap::elevatorElevatorTalon->Set((joystickY));
+		RobotMap::elevatorElevatorTalon->Set(joystickY);
 	}
 
+	printf("Encoder Value: %d, Setpoint: %d\n", currentPosition, setpoint);
 }
 
 // Make this return true when this Command no longer needs to run execute()
