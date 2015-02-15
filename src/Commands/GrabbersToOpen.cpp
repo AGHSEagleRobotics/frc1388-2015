@@ -23,7 +23,7 @@ GrabbersToOpen::GrabbersToOpen() {
 
 // Called just before this Command runs the first time
 void GrabbersToOpen::Initialize() {
-	Robot::grabbers->ResetEncoder();
+	RobotMap::grabbersGrabberCANTalon->Set(TOOPEN_WIDTH); //TODO: set open position value
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -33,7 +33,7 @@ void GrabbersToOpen::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool GrabbersToOpen::IsFinished() {
-	return true;
+	return false;
 }
 
 // Called once after isFinished returns true

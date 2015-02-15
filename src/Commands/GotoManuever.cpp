@@ -21,7 +21,7 @@ GotoManuever::GotoManuever() {
 
 // Called just before this Command runs the first time
 void GotoManuever::Initialize() {
-	RobotMap::grabbersGrabberCANTalon->Set(MANUEVER_WIDTH);
+	RobotMap::grabbersGrabberCANTalon->Set(MANUEVER_WIDTH);//TODO: set maneuver width
 
 }
 

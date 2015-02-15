@@ -52,6 +52,12 @@ void Robot::GlobalPeriodic(){
 	if(GetUserButton()) {
 		RobotMap::driveTrainGyro->Reset();
 	}
+	if(RobotMap::grabbersGrabberCANTalon->IsRevLimitSwitchClosed()) {
+		RobotMap::grabbersGrabberCANTalon->SetPosition(0);
+	}
+	if(RobotMap::elevatorElevatorTalon->IsRevLimitSwitchClosed()) {
+		RobotMap::elevatorElevatorTalon->SetPosition(0); // TODO set to inches above ground
+	}
 }
 /**
  * This function is called when the disabled button is hit.
