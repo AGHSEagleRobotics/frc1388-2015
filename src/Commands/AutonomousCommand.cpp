@@ -21,10 +21,17 @@
 #include "GrabberstoOpen.h"
 #include "GotoTrashcan.h"
 
+
+
 #define ROBOT_SET_DISTANCE 60
-#define ELEVATOR_MOVE_HEIGHT 30 //somewhat random numbers picked, need refining
+#define ELEVATOR_MOVE_HEIGHT 7 //somewhat random numbers picked, need refining
 #define TOTE_SET_DISTANCE 110
 
+
+#define VERT_STACK_DIST 107
+#define HOR_STACK_DIST 81
+#define SLEEP_TIME 3
+#define SECOND_SLEEP 7
 AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) {
 
 	command = commandInput;
@@ -40,7 +47,7 @@ AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) 
 		AddSequential(new SetSetpoint(ELEVATOR_MOVE_HEIGHT));
 		AddSequential(new AutonomousTurn(90));
 		AddSequential(new AutonomousMove(TOTE_SET_DISTANCE));
-		AddSequential(new SetSetpoint(0.0));
+		AddSequential(new SetSetpoint(3.5));
 		AddSequential(new GrabbersToOpen());
 		break;
 	case ContainerSet:
@@ -48,31 +55,158 @@ AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) 
 		AddSequential(new SetSetpoint(ELEVATOR_MOVE_HEIGHT));
 		AddSequential(new AutonomousTurn(90));
 		AddSequential(new AutonomousMove(TOTE_SET_DISTANCE));
-		AddSequential(new SetSetpoint(0.0));
+		AddSequential(new SetSetpoint(3.5));
 		AddSequential(new GrabbersToOpen());
 		break;
 	case StepAttack:
-
+		/* Step Attack is an Autonomous possibility that involves grabbing totes and recyclecans for
+		 * the purpose of the game more than scoring in autonomous
+		 *
+		 * the many magical numbers below are pre-calculated distances, measurements, and turning
+		 * degrees necessary to get the desired result
+		 *
+		 * the numbers are, for the most part, not interchangeable so this autonomous command
+		 * will not be good for on the spot calculations at competition
+		 */
+		AddSequential(new AutonomousMove(51));
+		AddSequential(new AutonomousTurn(90));
+		AddSequential(new AutonomousMove(27.6));
+		AddSequential(new GotoSlimTote());
+		AddSequential(new AutonomousTurn(80));
+		AddSequential(new GrabbersToOpen());
+		AddSequential(new AutonomousTurn(-80));
+		AddSequential(new AutonomousMove(16.9));
+		AddSequential(new AutonomousTurn(30));
+		AddSequential(new AutonomousMove(6));
+		AddSequential(new AutonomousTurn(30));
+		AddSequential(new AutonomousMove(6));
+		AddSequential(new AutonomousTurn(30));
+		AddSequential(new AutonomousMove(36));
+		AddSequential(new AutonomousTurn(-180));
+		AddSequential(new SetSetpoint(ELEVATOR_MOVE_HEIGHT));
+		AddSequential(new AutonomousMove(12));
+		AddSequential(new GotoTrashcan());
+		AddSequential(new AutonomousMove(-24));
+		AddSequential(new AutonomousTurn(-100));
+		AddSequential(new AutonomousMove(27.6));
+		AddSequential(new AutonomousTurn(-80));
+		AddSequential(new AutonomousMove(120));
 		break;
-	case StackedToteSet:
 
-		break;
 	}
-	// Add Commands here:
-	// e.g. AddSequential(new Command1());
-	//      AddSequential(new Command2());
-	// these will run in order.
-	//test
-	// To run multiple commands at the same time,
-	// use AddParallel()
-	// e.g. AddParallel(new Command1());
-	//      AddSequential(new Command2());
-	// Command1 and Command2 will run in parallel.
 
-	// A command group will require all of the subsystems that each member
-	// would require.
-	// e.g. if Command1 requires chassis, and Command2 requires arm,
-	// a CommandGroup containing them would require both the chassis and the
-	// arm.
 
+}
+AutonomousCommand::AutonomousCommand(uint8_t startPos, uint8_t stackLevel){
+	command = StackedToteSet;
+	AddSequential(new SetElevatorZeroPoint);
+	switch (startPos){
+	// the start positions are numbered based on which tote you would be picking up first from left to right (farthest left equaling 1)
+		case 1:
+			//Pick up the tote.
+			AddSequential(new GotoSlimTote());
+			AddSequential(new SetSetpoint(ELEVATOR_MOVE_HEIGHT));
+			AddSequential(new AutonomousTurn(-90));
+			// Turn to the left?
+			AddSequential(new AutonomousMove(VERT_STACK_DIST));
+			AddSequential(new AutonomousTurn(90));
+			//turn
+			//sleep?
+			switch(stackLevel){
+				// stack levels are which level the tote will be stacked on
+				case 1:
+				AddSequential(new SetSetpoint(3.5)); //see OI.cpp
+				AddSequential(new AutonomousMove(HOR_STACK_DIST));
+				AddSequential(new GrabbersToOpen());
+				AddSequential(new AutonomousMove(-HOR_STACK_DIST));
+				break;
+				case 2:
+				AddSequential(new WaitCommand(SLEEP_TIME));
+				AddSequential(new SetSetpoint(5.7513));
+				AddSequential(new AutonomousMove(HOR_STACK_DIST));
+				AddSequential(new GrabbersToOpen());
+				AddSequential(new AutonomousMove(-HOR_STACK_DIST));
+
+				break;
+				case 3:
+				AddSequential(new WaitCommand(SECOND_SLEEP));
+				AddSequential(new SetSetpoint(17.8513));
+				AddSequential(new AutonomousMove(HOR_STACK_DIST));
+				AddSequential(new GrabbersToOpen());
+				AddSequential(new AutonomousMove(-HOR_STACK_DIST));
+
+				}
+			break;
+		case 2:
+			AddSequential(new GotoSlimTote());
+			AddSequential(new SetSetpoint(ELEVATOR_MOVE_HEIGHT));
+			AddSequential(new AutonomousTurn(-90));
+			AddSequential(new AutonomousMove(VERT_STACK_DIST-36));
+
+			switch(stackLevel){
+				case 1:
+					AddSequential(new SetSetpoint(3.5));
+					AddSequential(new AutonomousMove(36));  // 3 feet - a a decent distance from other robots
+					AddSequential(new AutonomousTurn(90));
+					AddSequential(new GrabbersToOpen());
+					AddSequential(new AutonomousTurn(90));
+					AddSequential(new AutonomousMove(24)); //yo dawg this might put you out of auto zone, change if so
+					break;
+				case 2:
+					AddSequential(new WaitCommand(SLEEP_TIME));
+					AddSequential(new SetSetpoint(5.7513));
+					AddSequential(new AutonomousMove(36)); // 3 feet - a decent amount shy, as not to get in the way
+					AddSequential(new AutonomousTurn(90));
+					AddSequential(new GrabbersToOpen());
+					AddSequential(new AutonomousTurn(90));
+					AddSequential(new AutonomousMove(24));
+					break;
+
+				case 3:
+                    AddSequential(new WaitCommand(SECOND_SLEEP));
+                    AddSequential(new SetSetpoint(17.8513));
+                    AddSequential(new AutonomousMove(36)); // 3 feet - a decent amount shy, as not to get in the way of robots
+                    AddSequential(new AutonomousTurn(90));
+                    AddSequential(new GrabbersToOpen());
+                    AddSequential(new AutonomousTurn(90));
+                    AddSequential(new AutonomousMove(24));
+
+					}
+			break;
+		case 3:
+			switch(stackLevel){
+			//Pick up the tote.
+			AddSequential(new GotoSlimTote());
+			AddSequential(new SetSetpoint(ELEVATOR_MOVE_HEIGHT));
+			AddSequential(new AutonomousTurn(90));
+			// Turn to the left?
+			AddSequential(new AutonomousMove(VERT_STACK_DIST));
+			AddSequential(new AutonomousTurn(-90));
+			//turn
+			//sleep?
+			case 1:
+				AddSequential(new SetSetpoint(3.5)); //see OI.cpp
+				AddSequential(new AutonomousMove(HOR_STACK_DIST));
+				AddSequential(new GrabbersToOpen());
+				AddSequential(new AutonomousMove(-HOR_STACK_DIST));
+				break;
+				case 2:
+				AddSequential(new WaitCommand(SLEEP_TIME));
+				AddSequential(new SetSetpoint(5.7513));
+				AddSequential(new AutonomousMove(HOR_STACK_DIST));
+				AddSequential(new GrabbersToOpen());
+				AddSequential(new AutonomousMove(-HOR_STACK_DIST));
+
+				break;
+				case 3:
+				AddSequential(new WaitCommand(SECOND_SLEEP));
+				AddSequential(new SetSetpoint(17.8513));
+				AddSequential(new AutonomousMove(HOR_STACK_DIST));
+				AddSequential(new GrabbersToOpen());
+				AddSequential(new AutonomousMove(-HOR_STACK_DIST));
+
+				}
+			break;
+
+	}
 }
