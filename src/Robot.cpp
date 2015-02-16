@@ -52,6 +52,7 @@ void Robot::GlobalInit(){
 void Robot::GlobalPeriodic(){
 	if(GetUserButton()) {
 		RobotMap::driveTrainGyro->Reset();
+		RobotMap::driveTrainDefaultGyro->Reset();
 	}
 	int encoder = (RobotMap::elevatorElevatorTalon->GetPosition() / ELEVATOR_PULSES_PER_INCH);
 	bool topLimit = RobotMap::elevatorElevatorTalon->IsFwdLimitSwitchClosed();
