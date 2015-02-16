@@ -29,26 +29,27 @@ void SetElevatorZeroPoint::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void SetElevatorZeroPoint::Execute(){
-	
+/*
 	if(RobotMap::elevatorElevatorTalon->IsRevLimitSwitchClosed()){
 		RobotMap::elevatorElevatorTalon->Set(0.0);
 	}else{
 		RobotMap::elevatorElevatorTalon->Set(-0.5);
 	}
+*/
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool SetElevatorZeroPoint::IsFinished() {
-	//TODO: use isLimitAlreadyHit more
-	if(RobotMap::elevatorElevatorTalon->IsRevLimitSwitchClosed()){
+//	TODO: use isLimitAlreadyHit more
+//	if(RobotMap::elevatorElevatorTalon->IsRevLimitSwitchClosed()){
 		return true;
-	}
-	return false;
+//	}
+//	return false;
 }
 
 // Called once after isFinished returns true
 void SetElevatorZeroPoint::End() {
-	RobotMap::elevatorElevatorTalon->SetPosition(0.0);
+//	RobotMap::elevatorElevatorTalon->SetPosition(0.0);
 }
 
 // Called when another command which requires one or more of the same
