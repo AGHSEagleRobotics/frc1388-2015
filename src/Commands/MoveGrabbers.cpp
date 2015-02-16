@@ -52,7 +52,7 @@ void MoveGrabbers::Execute() {
 			RobotMap::grabbersGrabberCANTalon->GetPosition() + ModifiedOpStickZ);
 		//printf("ModifiedStick: %f\t" , ModifiedOpStickZ);
 	} else {
-		RobotMap::grabbersGrabberCANTalon->Set(-1 * Robot::oi->getOpStickZ()());
+		RobotMap::grabbersGrabberCANTalon->Set(-1 * Robot::oi->getOpStickZ());
 		if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed()) {
 					RobotMap::grabbersGrabberCANTalon->SetPosition(0);
 				printf("Inside limit: %d \n"
