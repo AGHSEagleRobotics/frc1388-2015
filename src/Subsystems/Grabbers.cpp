@@ -42,11 +42,11 @@ void Grabbers::InitDefaultCommand() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 void Grabbers::ResetEncoder(){
-	if(Robot::grabbers->grabberoutsidelimit->Get() == false)
+	if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed() == false)//TODO:check if this is the right limit swtich
 			{
-				RobotMap::grabbersGrabberCANTalon->Set(INFINITE_ERROR);
+				RobotMap::grabbersGrabberCANTalon->Set(INFINITE_ERROR);//TODO: check if "INFINITE_ERROR" is correct sign
 			}
-	else if(Robot::grabbers->grabberoutsidelimit->Get() == true)
+	else if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed() == true)//TODO:check if this is the right limit swtich
 			{
 				RobotMap::grabbersGrabberCANTalon->SetPosition(0);
 			}

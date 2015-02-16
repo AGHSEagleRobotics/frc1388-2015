@@ -24,6 +24,7 @@
 class MoveElevator: public Command {
 private:
 	bool isPositionControl;
+	int m_povPrevState;
 public:
 	MoveElevator();
 	virtual void Initialize();

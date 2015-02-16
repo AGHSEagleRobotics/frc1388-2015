@@ -19,6 +19,7 @@
 #include "Commands/AutonomousTurn.h"
 #include "Commands/ControlledDrive.h"
 #include "Commands/Drive.h"
+#include "Commands/EnableGyro.h"
 #include "Commands/GotoManuever.h"
 #include "Commands/GotoSlimTote.h"
 #include "Commands/GotoTote.h"
@@ -48,6 +49,8 @@ OI::OI() {
 	openGrabbers->WhenPressed(new GrabbersToOpen());
 	driveStick = new Joystick(1);
 	
+	zeroElevator = new JoystickButton(driveStick, 3);
+	zeroElevator->WhenPressed(new SetElevatorZeroPoint());
 	gyroReset = new JoystickButton(driveStick, 2);
 	gyroReset->WhenPressed(new Drive());
 	controldrivebutton = new JoystickButton(driveStick, 1);
@@ -101,12 +104,16 @@ float OI::getDriveStickZ(){
 	return (joystickDeadband(driveStick->GetZ()));
 }
 
+float OI::getOpStickZ(){
+	return (joystickDeadband(opStick->GetZ()));
+}
+
 float OI::getOpStickX(){
-	return (joystickDeadband(opStick->GetX()));
+	return -(joystickDeadband(opStick->GetX()));
 }
 
 float OI::getOpStickY(){
-	return (joystickDeadband(opStick->GetY()));
+	return -(joystickDeadband(opStick->GetY()));
 }
 
 float OI::joystickDeadband(float joystickReturn){

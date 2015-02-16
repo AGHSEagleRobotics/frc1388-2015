@@ -10,7 +10,7 @@
 
 
 #include "SetSetpoint.h"
-
+#define ELEVATOR_PULSES_PER_INCH ((float) 512 / (32/14) / 4)
 SetSetpoint::SetSetpoint(float setpoint) {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -27,7 +27,7 @@ void SetSetpoint::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void SetSetpoint::Execute() {
-	RobotMap::elevatorElevatorTalon->Set(m_setpoint);
+	RobotMap::elevatorElevatorTalon->Set(m_setpoint * ELEVATOR_PULSES_PER_INCH);
 }
 
 // Make this return true when this Command no longer needs to run execute()

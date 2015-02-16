@@ -13,6 +13,8 @@
 #define STEP_OFFSET 4.1987
 #define PLATFORM_SETDOWN -2.2
 #define JOYSTICK_SCALING 0.4
+#define ELEVATOR_PULSES_PER_INCH ((float) 512 / (32/14) / 4)
+#define ELEVATOR_CONSTANT_FORCE 0.2
 
 MoveElevator::MoveElevator() {
 	// Use requires() here to declare subsystem dependencies
@@ -26,6 +28,8 @@ MoveElevator::MoveElevator() {
 // Called just before this Command runs the first time
 void MoveElevator::Initialize() {
 	isPositionControl = true;
+	m_povPrevState = 42069; //Scott picked this "magic" number
+	RobotMap::elevatorElevatorTalon->SetControlMode(CANTalon::kPosition);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -33,16 +37,21 @@ void MoveElevator::Execute() {
 	//This first part is basically an event listener for the POV (D-Pad) of the controller
 
 	signed int pov = Robot::oi->getopStick()->GetPOV();
-	float currentPosition = RobotMap::elevatorElevatorTalon->GetEncPosition();
-
+	int currentPosition = (RobotMap::elevatorElevatorTalon->GetPosition());
+	int setpoint = 0;
 	switch(pov){
-	case 0:
-		RobotMap::elevatorElevatorTalon->Set((currentPosition + STEP_OFFSET));
+	case 0: // Toe dough edge detection
+		setpoint = currentPosition + STEP_OFFSET * ELEVATOR_PULSES_PER_INCH;
+		RobotMap::elevatorElevatorTalon->Set(setpoint);
 		break;
-	case 4:
-		RobotMap::elevatorElevatorTalon->Set((currentPosition + PLATFORM_SETDOWN));
+	case 180:
+		setpoint = currentPosition + PLATFORM_SETDOWN * ELEVATOR_PULSES_PER_INCH;
+		RobotMap::elevatorElevatorTalon->Set(setpoint);
 		break;
-	case 6:
+	case 270:
+		if (m_povPrevState == 270)
+			break;
+		printf("isPositionControl: %d\n", isPositionControl);
 		isPositionControl = !isPositionControl;
 		if(isPositionControl){
 			Robot::elevator->elevatorTalon->SetControlMode(CANSpeedController::kPosition);
@@ -51,18 +60,26 @@ void MoveElevator::Execute() {
 		}
 	}
 
+	m_povPrevState = pov;
+
 	//This part is for actually moving the elevator manually with a joystick
 
 	float joystickY = Robot::oi->getOpStickY();
 	float scaledJoystickY = (joystickY * JOYSTICK_SCALING);
 
 	if(isPositionControl){
-		if(joystickY != 0)
-			RobotMap::elevatorElevatorTalon->Set((currentPosition + scaledJoystickY));
-	}else{
-		RobotMap::elevatorElevatorTalon->Set((joystickY));
-	}
+		setpoint = currentPosition + scaledJoystickY;
 
+		RobotMap::elevatorElevatorTalon->Set(setpoint);
+	}else{
+		if(joystickY <= 0.0){
+			RobotMap::elevatorElevatorTalon->Set((joystickY + ELEVATOR_CONSTANT_FORCE));
+		}else{
+			RobotMap::elevatorElevatorTalon->Set(joystickY);
+		}
+
+		//	printf("Encoder Value: %d, Setpoint: %d\n", currentPosition, setpoint);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

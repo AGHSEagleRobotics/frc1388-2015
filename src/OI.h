@@ -23,6 +23,7 @@ private:
 	JoystickButton* grabSlimTote;
 	JoystickButton* openGrabbers;
 	Joystick* driveStick;
+	JoystickButton* zeroElevator;
 	JoystickButton* gyroReset;
 	JoystickButton* controldrivebutton;
 
@@ -49,6 +50,7 @@ public:
 	float getDriveStickZ();
 	float getOpStickX();
 	float getOpStickY();
+	float getOpStickZ();
 };
 
 #endif
