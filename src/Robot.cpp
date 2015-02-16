@@ -45,18 +45,20 @@ void Robot::RobotInit() {
   }
 
 void Robot::GlobalInit(){
-
 }
 
 void Robot::GlobalPeriodic(){
 	if(GetUserButton()) {
 		RobotMap::driveTrainGyro->Reset();
 	}
-	if(RobotMap::grabbersGrabberCANTalon->IsRevLimitSwitchClosed()) {
+	if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed()) {
 		RobotMap::grabbersGrabberCANTalon->SetPosition(0);
+		printf("You are pressing the FWD! \n");
 	}
 	if(RobotMap::elevatorElevatorTalon->IsRevLimitSwitchClosed()) {
 		RobotMap::elevatorElevatorTalon->SetPosition(0); // TODO set to inches above ground
+		printf("YOU'RE A DUMBASS TOMMY \n");
+
 	}
 }
 /**

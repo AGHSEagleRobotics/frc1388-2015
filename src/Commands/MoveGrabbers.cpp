@@ -27,7 +27,7 @@ MoveGrabbers::MoveGrabbers() {
 
 // Called just before this Command runs the first time
 void MoveGrabbers::Initialize() {
-	printf("running init \n");
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -50,12 +50,19 @@ void MoveGrabbers::Execute() {
 		float ModifiedOpStickZ = (Robot::oi->getOpStickZ() * -10);
 		RobotMap::grabbersGrabberCANTalon->Set(
 			RobotMap::grabbersGrabberCANTalon->GetEncPosition() + ModifiedOpStickZ);
-		printf("ModifiedStick: %f\t", ModifiedOpStickZ);
+		//printf("ModifiedStick: %f\t" , ModifiedOpStickZ);
 	} else {
 		RobotMap::grabbersGrabberCANTalon->Set(-1 * Robot::oi->getOpStickZ());
-	}
+		if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed()) {
+					RobotMap::grabbersGrabberCANTalon->SetPosition(0);
+				printf("Inside limit: %d \n", RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed());
+		}
 	printf("encoder value: %d \n", RobotMap::grabbersGrabberCANTalon->GetEncPosition());
-	printf("encoder setpoint: %d \n", RobotMap::grabbersGrabberCANTalon->Get());
+	printf("encoder setpoint: %f \n", RobotMap::grabbersGrabberCANTalon->Get());
+
+	printf("Outside closed: %d \n", RobotMap::grabbersGrabberCANTalon->IsRevLimitSwitchClosed());
+
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
