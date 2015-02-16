@@ -44,17 +44,17 @@ void AutonomousMove::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void AutonomousMove::Execute() {
-	int Gyro = RobotMap::driveTrainGyro->GetNormalizedAngleZ();
+//	int Gyro = RobotMap::driveTrainGyro->GetNormalizedAngleZ();
 
 
 	if (isDistanceMove && m_distance > 0){
-		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, DIST_VELOCITY, 0.0, Gyro);
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, DIST_VELOCITY, 0.0, 0.0);
 	}
 	else if (isDistanceMove && m_distance < 0){
-		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, -DIST_VELOCITY, 0.0, Gyro);
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, -DIST_VELOCITY, 0.0, 0.0);
 	}
 	else if (!isDistanceMove){
-		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, m_velocity, 0.0, Gyro);
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, m_velocity, 0.0, 0.0);
 	}
 
 
@@ -70,11 +70,12 @@ bool AutonomousMove::IsFinished() {
 
 // Called once after isFinished returns true
 void AutonomousMove::End() {
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, 0.0, 0.0, 0.0);
 	
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void AutonomousMove::Interrupted() {
-
+	End();
 }
