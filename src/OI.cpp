@@ -105,6 +105,10 @@ float OI::getDriveStickZ(){
 	return (joystickDeadband(driveStick->GetZ()));
 }
 
+float OI::getOpStickZ(){
+	return (joystickDeadband(opStick->GetZ()));
+}
+
 float OI::getOpStickX(){
 	return -(joystickDeadband(opStick->GetX()));
 }

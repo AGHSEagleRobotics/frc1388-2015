@@ -22,6 +22,9 @@
  * @author ExampleAuthor
  */
 class MoveGrabbers: public Command {
+private:
+	int m_povPrevState;
+	bool isPositionControl;
 public:
 	MoveGrabbers();
 	virtual void Initialize();

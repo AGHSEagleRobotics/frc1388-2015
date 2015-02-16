@@ -50,6 +50,7 @@ public:
 	float getDriveStickZ();
 	float getOpStickX();
 	float getOpStickY();
+	float getOpStickZ();
 };
 
 #endif

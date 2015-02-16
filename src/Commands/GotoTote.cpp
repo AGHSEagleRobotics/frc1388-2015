@@ -23,7 +23,7 @@ GotoTote::GotoTote() {
 
 // Called just before this Command runs the first time
 void GotoTote::Initialize() {
-	RobotMap::grabbersGrabberCANTalon->Set(WIDETOTE_WIDTH);
+	RobotMap::grabbersGrabberCANTalon->Set(WIDETOTE_WIDTH);//TODO: set the wide tote width
 }
 
 // Called repeatedly when this Command is scheduled to run

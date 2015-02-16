@@ -59,6 +59,10 @@ void Robot::GlobalPeriodic(){
 	bool insideLimit = RobotMap::elevatorElevatorTalon->IsFwdLimitSwitchClosed();
 	printf("Encoder Value: %d, Top Limit: %d, Bottom Limit: %d, Inside Limit: %d\n", encoder, topLimit, bottomLimit, insideLimit);
 
+	if(insideLimit){
+		RobotMap::grabbersGrabberCANTalon->SetPosition(0.0);
+	}
+
 	if(bottomLimit){
 		RobotMap::elevatorElevatorTalon->SetPosition(0.0);
 	}
