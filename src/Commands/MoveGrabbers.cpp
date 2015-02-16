@@ -58,10 +58,10 @@ void MoveGrabbers::Execute() {
 				printf("Inside limit: %d \n"
 						, RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed());
 		}
-	printf("encoder value: %d \n", RobotMap::grabbersGrabberCANTalon->GetEncPosition());
-	printf("encoder setpoint: %f \n", RobotMap::grabbersGrabberCANTalon->Get());
-
-	printf("Outside closed: %d \n", RobotMap::grabbersGrabberCANTalon->IsRevLimitSwitchClosed());
+//	printf("encoder value: %d \n", RobotMap::grabbersGrabberCANTalon->GetEncPosition());
+//	printf("encoder setpoint: %f \n", RobotMap::grabbersGrabberCANTalon->Get());
+//
+//	printf("Outside closed: %d \n", RobotMap::grabbersGrabberCANTalon->IsRevLimitSwitchClosed());
 
 	}
 }

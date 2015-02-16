@@ -29,7 +29,8 @@ Elevator::Elevator() : Subsystem("Elevator") {
 	elevatorTalon = RobotMap::elevatorElevatorTalon;
 
 	elevatorTalon->SetControlMode(CANSpeedController::kPosition);
-	elevatorTalon->SetPID(0.3, 0.0, 0.0);
+	elevatorTalon->SetPID(0.4, 0.0005, 0.0);
+	elevatorTalon->SetIzone(1500);
 	elevatorTalon->EnableControl();
 	elevatorTalon->ConfigMaxOutputVoltage(4.0);
 }
