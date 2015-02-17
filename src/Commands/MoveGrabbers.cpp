@@ -33,7 +33,7 @@ void MoveGrabbers::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void MoveGrabbers::Execute() {
 	signed int pov = Robot::oi->getopStick()->GetPOV();
-
+	isPositionControl = (RobotMap::grabbersGrabberCANTalon->GetControlMode() == CANSpeedController::kPosition);
 	if (pov == 90 && m_povPrevState != 90) {
 		isPositionControl = !isPositionControl;
 		if(isPositionControl){
@@ -47,24 +47,19 @@ void MoveGrabbers::Execute() {
 	m_povPrevState = pov;
 
 	if (isPositionControl) {
-		float ModifiedOpStickZ = (Robot::oi->getOpStickZ() * -10);
-		RobotMap::grabbersGrabberCANTalon->Set(
-			RobotMap::grabbersGrabberCANTalon->GetPosition() + ModifiedOpStickZ);
-		//printf("ModifiedStick: %f\t" , ModifiedOpStickZ);
+		double currentPosition = RobotMap::grabbersGrabberCANTalon->GetPosition();
+		float ModifiedOpStickZ = (Robot::oi->getOpStickZ() * -500);
+		RobotMap::grabbersGrabberCANTalon->Set( currentPosition + ModifiedOpStickZ);
 	} else {
 		RobotMap::grabbersGrabberCANTalon->Set(-1 * Robot::oi->getOpStickZ());
-		if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed()) {
+		if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed())
+				{
 					RobotMap::grabbersGrabberCANTalon->SetPosition(0);
 				printf("Inside limit: %d \n"
 						, RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed());
-		}
-//	printf("encoder value: %d \n", RobotMap::grabbersGrabberCANTalon->GetEncPosition());
-//	printf("encoder setpoint: %f \n", RobotMap::grabbersGrabberCANTalon->Get());
-//
-//	printf("Outside closed: %d \n", RobotMap::grabbersGrabberCANTalon->IsRevLimitSwitchClosed());
-
+				}
+			}
 	}
-}
 
 // Make this return true when this Command no longer needs to run execute()
 bool MoveGrabbers::IsFinished() {

@@ -30,7 +30,7 @@ Elevator::Elevator() : Subsystem("Elevator") {
 
 	elevatorTalon->SetControlMode(CANSpeedController::kPosition);
 	elevatorTalon->SetPID(0.4, 0.0005, 0.0);
-	elevatorTalon->SetIzone(1500);
+	elevatorTalon->SetIzone(5000);
 	elevatorTalon->EnableControl();
 	elevatorTalon->ConfigMaxOutputVoltage(4.0);
 }
