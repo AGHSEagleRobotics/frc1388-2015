@@ -12,8 +12,7 @@
 #include "MoveElevator.h"
 #define STEP_OFFSET 4.1987
 #define PLATFORM_SETDOWN -2.2
-#define JOYSTICK_SCALING 0.4
-#define ELEVATOR_PULSES_PER_INCH ((float) 512 / (32/14) / 4)
+#define JOYSTICK_SCALING 3000
 #define ELEVATOR_CONSTANT_FORCE 0.2
 
 MoveElevator::MoveElevator() {
@@ -37,8 +36,8 @@ void MoveElevator::Execute() {
 	//This first part is basically an event listener for the POV (D-Pad) of the controller
 
 	signed int pov = Robot::oi->getopStick()->GetPOV();
-	int currentPosition = (RobotMap::elevatorElevatorTalon->GetPosition());
-	int setpoint = 0;
+	double currentPosition = (RobotMap::elevatorElevatorTalon->GetPosition());
+	float setpoint = 0;
 	switch(pov){
 	case 0: // Toe dough edge detection
 		setpoint = currentPosition + STEP_OFFSET * ELEVATOR_PULSES_PER_INCH;
@@ -69,17 +68,19 @@ void MoveElevator::Execute() {
 
 	if(isPositionControl){
 		setpoint = currentPosition + scaledJoystickY;
-
-		RobotMap::elevatorElevatorTalon->Set(setpoint);
+		if (scaledJoystickY != 0) // prevents drifting
+			RobotMap::elevatorElevatorTalon->Set(setpoint);
 	}else{
 		if(joystickY <= 0.0){
 			RobotMap::elevatorElevatorTalon->Set((joystickY + ELEVATOR_CONSTANT_FORCE));
 		}else{
 			RobotMap::elevatorElevatorTalon->Set(joystickY);
 		}
-
-		//	printf("Encoder Value: %d, Setpoint: %d\n", currentPosition, setpoint);
 	}
+
+	printf("[Elv] Encoder Value: %lf, Setpoint: %f, Error: %d\n",
+			currentPosition, RobotMap::elevatorElevatorTalon->GetSetpoint(),
+			RobotMap::elevatorElevatorTalon->GetClosedLoopError());
 }
 
 // Make this return true when this Command no longer needs to run execute()

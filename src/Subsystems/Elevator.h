@@ -14,6 +14,8 @@
 #include "Commands/Subsystem.h"
 #include "WPILib.h"
 
+#define ELEVATOR_PULSES_PER_INCH ((float) (512) * (32/14) * 1.12)
+
 /**
  *
  *

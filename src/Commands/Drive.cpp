@@ -34,7 +34,8 @@ Drive::Execute() {
 	float joystickX		 	= Robot::oi->getDriveStickX();
 	float joystickY		 	= Robot::oi->getDriveStickY();
 	float joystickZ		 	= Robot::oi->getDriveStickZ();
-	float gyroAngle	 		= RobotMap::driveTrainGyro->GetAngleZ();
+//	float gyroAngle	 		= RobotMap::driveTrainGyro->GetAngleZ();
+	float gyroAngle	 		= RobotMap::driveTrainDefaultGyro->GetAngle();
 //	float currentError   	= 0;
 //float rotSpeed		 = 0;
 
@@ -62,7 +63,7 @@ Drive::Execute() {
 //
 //	}
 
-	Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(joystickX, joystickY, joystickZ, gyroAngle);
+	Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(joystickX, joystickY, joystickZ, 0);//TODO: change back to gyro angle
 	if(Robot::oi->getdriveStick()->GetRawButton(2) == true)
 	{
 		RobotMap::driveTrainGyro->Reset();

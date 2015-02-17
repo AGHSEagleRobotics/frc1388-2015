@@ -10,7 +10,6 @@
 
 
 #include "SetSetpoint.h"
-#define ELEVATOR_PULSES_PER_INCH ((float) 512 / (32/14) / 4)
 SetSetpoint::SetSetpoint(float setpoint) {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);

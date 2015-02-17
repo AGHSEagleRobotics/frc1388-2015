@@ -49,18 +49,19 @@ void MoveGrabbers::Execute() {
 	if (isPositionControl) {
 		float ModifiedOpStickZ = (Robot::oi->getOpStickZ() * -10);
 		RobotMap::grabbersGrabberCANTalon->Set(
-			RobotMap::grabbersGrabberCANTalon->GetEncPosition() + ModifiedOpStickZ);
+			RobotMap::grabbersGrabberCANTalon->GetPosition() + ModifiedOpStickZ);
 		//printf("ModifiedStick: %f\t" , ModifiedOpStickZ);
 	} else {
 		RobotMap::grabbersGrabberCANTalon->Set(-1 * Robot::oi->getOpStickZ());
 		if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed()) {
 					RobotMap::grabbersGrabberCANTalon->SetPosition(0);
-				printf("Inside limit: %d \n", RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed());
+				printf("Inside limit: %d \n"
+						, RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed());
 		}
-	printf("encoder value: %d \n", RobotMap::grabbersGrabberCANTalon->GetEncPosition());
-	printf("encoder setpoint: %f \n", RobotMap::grabbersGrabberCANTalon->Get());
-
-	printf("Outside closed: %d \n", RobotMap::grabbersGrabberCANTalon->IsRevLimitSwitchClosed());
+//	printf("encoder value: %d \n", RobotMap::grabbersGrabberCANTalon->GetEncPosition());
+//	printf("encoder setpoint: %f \n", RobotMap::grabbersGrabberCANTalon->Get());
+//
+//	printf("Outside closed: %d \n", RobotMap::grabbersGrabberCANTalon->IsRevLimitSwitchClosed());
 
 	}
 }
