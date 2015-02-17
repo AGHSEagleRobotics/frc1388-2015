@@ -22,7 +22,7 @@ SpeedController* RobotMap::driveTrainLeftbacktalon = NULL;
 SpeedController* RobotMap::driveTrainRightbacktalon = NULL;
 RobotDrive* RobotMap::driveTrainRobotDrive41 = NULL;
 Encoder* RobotMap::driveTrainDriveencoder = NULL;
-//Gyro* RobotMap::driveTrainDefaultGyro = NULL;
+Gyro* RobotMap::driveTrainDefaultGyro = NULL;
 DigitalInput* RobotMap::grabbersGrabberoutsidelimit = NULL;
 DigitalInput* RobotMap::grabbersGrabberinsidelimit = NULL;
 DigitalInput* RobotMap::grabbersGrabbertotelimit = NULL;
@@ -67,11 +67,11 @@ void RobotMap::init() {
         driveTrainRobotDrive41->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
 	driveTrainDriveencoder = new Encoder(5, 7, false, Encoder::k4X);
 	lw->AddSensor("DriveTrain", "Driveencoder ", driveTrainDriveencoder);
-	driveTrainDriveencoder->SetDistancePerPulse(0.05027);
+	driveTrainDriveencoder->SetDistancePerPulse(0.0068544);
         driveTrainDriveencoder->SetPIDSourceParameter(Encoder::kDistance);
-//	driveTrainDefaultGyro = new Gyro(0);
-//	lw->AddSensor("DriveTrain", "DefaultGyro", driveTrainDefaultGyro);
-//	driveTrainDefaultGyro->SetSensitivity(0.007);
+	driveTrainDefaultGyro = new Gyro(0);
+	lw->AddSensor("DriveTrain", "DefaultGyro", driveTrainDefaultGyro);
+	driveTrainDefaultGyro->SetSensitivity(0.007);
 	grabbersGrabberoutsidelimit = new DigitalInput(6);
 	lw->AddSensor("Grabbers", "Grabberoutsidelimit", grabbersGrabberoutsidelimit);
 	

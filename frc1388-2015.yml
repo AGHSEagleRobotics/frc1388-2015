@@ -152,7 +152,7 @@ Children:
           validators: &id007 [DigitalChannel]
           value: '5'
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
-          name: Distance Per Pulse, validators: null, value: 0.05027}
+          name: Distance Per Pulse, validators: null, value: 0.0068544}
         PID Source: !!robotbuilder.data.properties.ChoicesProperty
           choices: &id008 [kDistance, kRate]
           default: kRate
@@ -178,7 +178,7 @@ Children:
       Base: Quadrature Encoder
       Name: 'Driveencoder '
     - Children: []
-    Properties:
+      Properties:
         Sensitivity: !!robotbuilder.data.properties.DoubleProperty {default: 0.007,
           name: Sensitivity, validators: null, value: 0.007}
         Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
@@ -317,7 +317,7 @@ Children:
       Base: Joystick Button
       Name: GyroReset
     - Children: []
-    Properties:
+      Properties:
         Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
           name: Joystick, validators: null, value: driveStick}
         Button: !!robotbuilder.data.properties.ChoicesProperty
