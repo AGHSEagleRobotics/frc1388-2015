@@ -50,7 +50,7 @@ void MoveElevator::Execute() {
 	case 270:
 		if (m_povPrevState == 270)
 			break;
-		printf("isPositionControl: %d\n", isPositionControl);
+		//printf("isPositionControl: %d\n", isPositionControl);
 		isPositionControl = !isPositionControl;
 		if(isPositionControl){
 			Robot::elevator->elevatorTalon->SetControlMode(CANSpeedController::kPosition);
@@ -78,9 +78,9 @@ void MoveElevator::Execute() {
 		}
 	}
 
-	printf("[Elv] Encoder Value: %lf, Setpoint: %f, Error: %d\n",
-			currentPosition, RobotMap::elevatorElevatorTalon->GetSetpoint(),
-			RobotMap::elevatorElevatorTalon->GetClosedLoopError());
+	//printf("[Elv] Encoder Value: %lf, Setpoint: %f, Error: %d\n",
+		//	currentPosition, RobotMap::elevatorElevatorTalon->GetSetpoint(),
+			//RobotMap::elevatorElevatorTalon->GetClosedLoopError());
 }
 
 // Make this return true when this Command no longer needs to run execute()
