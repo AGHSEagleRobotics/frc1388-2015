@@ -4,3 +4,4 @@
 GitVersion.h
 /.settings
 .settings
+/sysProps.xml

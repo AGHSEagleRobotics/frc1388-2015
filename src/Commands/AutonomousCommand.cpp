@@ -33,12 +33,13 @@
 #define SLEEP_TIME 3
 #define SECOND_SLEEP 7
 AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) {
-
+	printf("The robot is in Autonomous\n");
 	command = commandInput;
 	AddSequential(new SetElevatorZeroPoint());
 
 	switch (commandInput){
 	case RobotSet:
+		printf("The robot is in RobotSet\n");
 		AddSequential(new AutonomousMove(ROBOT_SET_DISTANCE));
 		break;
 	case ToteSet:

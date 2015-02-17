@@ -10,7 +10,7 @@
 
 #include "AutonomousMove.h"
 #include "ITG3200.h"
-#define DIST_VELOCITY 0.5
+#define DIST_VELOCITY 0.35
 
 
 AutonomousMove::AutonomousMove(float velocity, float time) {
@@ -39,22 +39,23 @@ AutonomousMove::AutonomousMove(float distance) {
 // Called just before this Command runs the first time
 void AutonomousMove::Initialize() {
 	if (isDistanceMove)
-		m_distance += RobotMap::driveTrainDriveencoder->Get();
+		m_distance += RobotMap::driveTrainDriveencoder->GetDistance();
+	printf("Autonomous Move Initialize happened\n");
 }
 
 // Called repeatedly when this Command is scheduled to run
 void AutonomousMove::Execute() {
-	int Gyro = RobotMap::driveTrainGyro->GetNormalizedAngleZ();
+//	int Gyro = RobotMap::driveTrainGyro->GetNormalizedAngleZ();
 
 
 	if (isDistanceMove && m_distance > 0){
-		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, DIST_VELOCITY, 0.0, Gyro);
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, -DIST_VELOCITY, 0.0, 0.0);
 	}
 	else if (isDistanceMove && m_distance < 0){
-		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, -DIST_VELOCITY, 0.0, Gyro);
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, DIST_VELOCITY, 0.0, 0.0);
 	}
 	else if (!isDistanceMove){
-		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, m_velocity, 0.0, Gyro);
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, -m_velocity, 0.0, 0.0);
 	}
 
 
@@ -62,19 +63,26 @@ void AutonomousMove::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool AutonomousMove::IsFinished() {
-	if (isDistanceMove)
-		return RobotMap::driveTrainDriveencoder->Get() > m_distance;
+	printf("AutonomousMove:m_distance=%f encoder=%f\n", m_distance, RobotMap::driveTrainDriveencoder->GetDistance());
+	if (isDistanceMove && m_distance > 0){
+		printf("Distance move is true, IsFinished was encountered\n");
+		return (RobotMap::driveTrainDriveencoder->GetDistance() >= m_distance);
+	}
+	else if (isDistanceMove && m_distance < 0){
+		return (RobotMap::driveTrainDriveencoder->GetDistance() <= m_distance);
+	}
 	else
 		return IsTimedOut();
 }
 
 // Called once after isFinished returns true
 void AutonomousMove::End() {
+		Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(0.0, 0.0, 0.0, 0.0);
 	
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void AutonomousMove::Interrupted() {
-
+	End();
 }
