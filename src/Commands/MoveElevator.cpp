@@ -13,7 +13,8 @@
 #define STEP_OFFSET 4.1987
 #define PLATFORM_SETDOWN -2.2
 #define JOYSTICK_SCALING 3000
-#define ELEVATOR_CONSTANT_FORCE 0.2
+#define ELEVATOR_CONSTANT_FORCE 0.01
+#define ELEVATOR_PULSES_PER_INCH ((float) (512) * (32/14) * 1.12)
 
 MoveElevator::MoveElevator() {
 	// Use requires() here to declare subsystem dependencies

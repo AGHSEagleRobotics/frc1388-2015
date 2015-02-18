@@ -33,6 +33,7 @@ Elevator::Elevator() : Subsystem("Elevator") {
 	elevatorTalon->SetIzone(5000);
 	elevatorTalon->EnableControl();
 	elevatorTalon->ConfigMaxOutputVoltage(4.0);
+	elevatorTalon->ConfigNeutralMode(CANSpeedController::kNeutralMode_Brake);
 }
     
 void Elevator::InitDefaultCommand() {
