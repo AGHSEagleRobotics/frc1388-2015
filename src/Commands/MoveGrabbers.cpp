@@ -48,10 +48,10 @@ void MoveGrabbers::Execute() {
 
 	if (isPositionControl) {
 		double currentPosition = RobotMap::grabbersGrabberCANTalon->GetPosition();
-		float ModifiedOpStickZ = (Robot::oi->getOpStickZ() * -500);
-		RobotMap::grabbersGrabberCANTalon->Set( currentPosition + ModifiedOpStickZ);
+		float ModifiedOpStickY = (Robot::oi->getOpStickY() * -500);
+		RobotMap::grabbersGrabberCANTalon->Set( currentPosition + ModifiedOpStickY);
 	} else {
-		RobotMap::grabbersGrabberCANTalon->Set(-1 * Robot::oi->getOpStickZ());
+		RobotMap::grabbersGrabberCANTalon->Set(-1 * Robot::oi->getOpStickY());
 		if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed())
 				{
 					RobotMap::grabbersGrabberCANTalon->SetPosition(0);

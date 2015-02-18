@@ -121,6 +121,6 @@ float OI::joystickDeadband(float joystickReturn){
 		return 0.0;
 	}else if(joystickReturn > 0 && joystickReturn < 0.1){
 		return 0.0;
-	}
+}
 	return joystickReturn;
 }
