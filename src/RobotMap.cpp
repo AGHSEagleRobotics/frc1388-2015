@@ -94,6 +94,7 @@ void RobotMap::init() {
     grabbersGrabberCANTalon->SetPID(1,0.001,0);
     grabbersGrabberCANTalon->SetIzone(2000);
     grabbersGrabberCANTalon->EnableControl();
+    grabbersGrabberCANTalon->ConfigNeutralMode(CANSpeedController::kNeutralMode_Brake);
     elevatorElevatorTalon = new CANTalon(12);
     driveTrainGyro = new ITG3200();
 }
