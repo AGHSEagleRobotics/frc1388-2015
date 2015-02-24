@@ -1,7 +1,8 @@
 COMPETITION LIST:
 -Netbooks
+-Chargers For Laptops
 -Outlet Strips
 -Development Laptop(s)
 -Ethernet Cables
--USB cable (for reimaging the rio if worst comes to worst)
--
+-USB A to B cable (for reimaging the rio if worst comes to worst)
+-Game Controllerssss
