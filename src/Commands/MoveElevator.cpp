@@ -13,7 +13,8 @@
 #define STEP_OFFSET 4.1987
 #define PLATFORM_SETDOWN -2.2
 #define JOYSTICK_SCALING 3000
-#define ELEVATOR_CONSTANT_FORCE 0.2
+#define ELEVATOR_CONSTANT_FORCE 0.01
+#define ELEVATOR_PULSES_PER_INCH ((float) (512) * (32/14) * 1.12)
 
 MoveElevator::MoveElevator() {
 	// Use requires() here to declare subsystem dependencies
@@ -50,10 +51,12 @@ void MoveElevator::Execute() {
 	case 270:
 		if (m_povPrevState == 270)
 			break;
-		//printf("isPositionControl: %d\n", isPositionControl);
+
+//		printf("isPositionControl: %d\n", isPositionControl);
 		isPositionControl = !isPositionControl;
 		if(isPositionControl){
 			Robot::elevator->elevatorTalon->SetControlMode(CANSpeedController::kPosition);
+			Robot::elevator->elevatorTalon->ClearIaccum();
 		}else{
 			Robot::elevator->elevatorTalon->SetControlMode(CANSpeedController::kPercentVbus);
 		}
@@ -63,25 +66,36 @@ void MoveElevator::Execute() {
 
 	//This part is for actually moving the elevator manually with a joystick
 
-	float joystickY = Robot::oi->getOpStickY();
-	float scaledJoystickY = (joystickY * JOYSTICK_SCALING);
+	float joystickZ = Robot::oi->getOpStickZ();
+	float scaledJoystickZ = (joystickZ * JOYSTICK_SCALING);
+
+	static bool bStop = false;
 
 	if(isPositionControl){
-		setpoint = currentPosition + scaledJoystickY;
-		if (scaledJoystickY != 0) // prevents drifting
+		setpoint = currentPosition + scaledJoystickZ;
+		if (scaledJoystickZ != 0){ // prevents drifting
+			bStop = true;
 			RobotMap::elevatorElevatorTalon->Set(setpoint);
-	}else{
-		if(joystickY <= 0.0){
-			RobotMap::elevatorElevatorTalon->Set((joystickY + ELEVATOR_CONSTANT_FORCE));
+			printf("Setpoint: %f, %f, %f\n", setpoint, currentPosition, scaledJoystickZ);
 		}else{
-			RobotMap::elevatorElevatorTalon->Set(joystickY);
+			if(bStop){
+				RobotMap::elevatorElevatorTalon->Set(currentPosition);
+				RobotMap::elevatorElevatorTalon->ClearIaccum();
+				bStop = false;
+			}
+		}
+	}else{
+
+		if(joystickZ <= 0.0){
+			RobotMap::elevatorElevatorTalon->Set((joystickZ + ELEVATOR_CONSTANT_FORCE));
+		}else{
+
+			RobotMap::elevatorElevatorTalon->Set(joystickZ);
 		}
 	}
-
-	//printf("[Elv] Encoder Value: %lf, Setpoint: %f, Error: %d\n",
-		//	currentPosition, RobotMap::elevatorElevatorTalon->GetSetpoint(),
-			//RobotMap::elevatorElevatorTalon->GetClosedLoopError());
 }
+
+
 
 // Make this return true when this Command no longer needs to run execute()
 bool MoveElevator::IsFinished() {

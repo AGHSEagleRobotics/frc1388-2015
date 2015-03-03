@@ -23,11 +23,13 @@ GrabbersToOpen::GrabbersToOpen() {
 
 // Called just before this Command runs the first time
 void GrabbersToOpen::Initialize() {
-	RobotMap::grabbersGrabberCANTalon->Set(TOOPEN_WIDTH); //TODO: set open position value
+	RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
+	RobotMap::grabbersGrabberCANTalon->EnableControl();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void GrabbersToOpen::Execute() {
+	RobotMap::grabbersGrabberCANTalon->Set(TOOPEN_WIDTH);
 
 }
 

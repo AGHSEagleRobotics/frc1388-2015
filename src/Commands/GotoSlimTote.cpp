@@ -22,11 +22,15 @@ GotoSlimTote::GotoSlimTote() {
 
 // Called just before this Command runs the first time
 void GotoSlimTote::Initialize() {
-	RobotMap::grabbersGrabberCANTalon->Set(SLIMTOTE_WIDTH);//TODO: set the slimtote width
+	RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
+	RobotMap::grabbersGrabberCANTalon->EnableControl();
+
 }
 
 // Called repeatedly when this Command is scheduled to run
 void GotoSlimTote::Execute() {
+	double currentposition = (RobotMap::grabbersGrabberCANTalon->GetPosition());
+	RobotMap::grabbersGrabberCANTalon->Set(SLIMTOTE_WIDTH);
 	
 }
 

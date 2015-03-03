@@ -61,7 +61,7 @@ void RobotMap::init() {
 	
 	driveTrainRobotDrive41->SetSafetyEnabled(true);
         driveTrainRobotDrive41->SetExpiration(0.1);
-        driveTrainRobotDrive41->SetSensitivity(0.5);
+       driveTrainRobotDrive41->SetSensitivity(0.5);
         driveTrainRobotDrive41->SetMaxOutput(1.0);
         driveTrainRobotDrive41->SetInvertedMotor(RobotDrive::kFrontLeftMotor, true);
         driveTrainRobotDrive41->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
@@ -92,7 +92,9 @@ void RobotMap::init() {
     grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
    // grabbersGrabberCANTalon->ConfigMaxOutputVoltage(6);
     grabbersGrabberCANTalon->SetPID(1,0.001,0);
+    grabbersGrabberCANTalon->SetIzone(2000);
     grabbersGrabberCANTalon->EnableControl();
+    grabbersGrabberCANTalon->ConfigNeutralMode(CANSpeedController::kNeutralMode_Brake);
     elevatorElevatorTalon = new CANTalon(12);
     driveTrainGyro = new ITG3200();
 }

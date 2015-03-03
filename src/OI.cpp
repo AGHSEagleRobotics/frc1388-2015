@@ -63,8 +63,7 @@ OI::OI() {
 	elevatorPickup = new JoystickButton(opStick, 10);
 	elevatorPickup->WhenPressed(new SetSetpoint(4.5));
 
-	stackFirstTote
-	= new JoystickButton(opStick, 9);
+	stackFirstTote = new JoystickButton(opStick, 9);
 	stackFirstTote->WhenPressed(new SetSetpoint(8.7513));
 
 	elevatorLevel2 = new JoystickButton(opStick, 5);
@@ -122,6 +121,6 @@ float OI::joystickDeadband(float joystickReturn){
 		return 0.0;
 	}else if(joystickReturn > 0 && joystickReturn < 0.1){
 		return 0.0;
-	}
+}
 	return joystickReturn;
 }
