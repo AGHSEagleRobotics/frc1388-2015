@@ -69,10 +69,10 @@ AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) 
 		 * the numbers are, for the most part, not interchangeable so this autonomous command
 		 * will not be good for on the spot calculations at competition
 		 */
-		AddSequential(new AutonomousMove(51));
-		AddSequential(new AutonomousTurn(90));
-		AddSequential(new AutonomousMove(27.6));
-		AddSequential(new GotoSlimTote());
+		AddSequential(new AutonomousMove(51)); //
+		AddSequential(new AutonomousTurn(90)); //
+		AddSequential(new AutonomousMove(27.6)); //
+		AddSequential(new GotoSlimTote()); //
 		AddSequential(new AutonomousTurn(80));
 		AddSequential(new GrabbersToOpen());
 		AddSequential(new AutonomousTurn(-80));
@@ -92,6 +92,11 @@ AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) 
 		AddSequential(new AutonomousMove(27.6));
 		AddSequential(new AutonomousTurn(-80));
 		AddSequential(new AutonomousMove(120));
+		//Todo: Test the values, test the turns, test the movements, map out each line and what they should do prior to competitoin
+		break;
+
+	case StackedToteSet: // Use other contrustor instead
+	default:
 		break;
 
 	}
@@ -115,6 +120,7 @@ AutonomousCommand::AutonomousCommand(uint8_t startPos, uint8_t stackLevel){
 			//sleep?
 			switch(stackLevel){
 				// stack levels are which level the tote will be stacked on
+				// Different sleep times are to wait for other robots
 				case 1:
 				AddSequential(new SetSetpoint(3.5)); //see OI.cpp
 				AddSequential(new AutonomousMove(HOR_STACK_DIST));
