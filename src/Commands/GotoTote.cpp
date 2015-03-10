@@ -24,17 +24,23 @@ GotoTote::GotoTote() {
 // Called just before this Command runs the first time
 void GotoTote::Initialize() {
 	RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
-	RobotMap::grabbersGrabberCANTalon->EnableControl();
+		RobotMap::grabbersGrabberCANTalon->EnableControl();
+		 RobotMap::grabbersGrabberCANTalon->Set(WIDETOTE_WIDTH);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void GotoTote::Execute() {
-	 RobotMap::grabbersGrabberCANTalon->Set(WIDETOTE_WIDTH);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool GotoTote::IsFinished() {
-	return true;
+	if(RobotMap::grabbersGrabberCANTalon->GetPosition() == WIDETOTE_WIDTH)
+			{
+			return true;
+			}
+		else{
+			return false;
+			}
 }
 
 // Called once after isFinished returns true

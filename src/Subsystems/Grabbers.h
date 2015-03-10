@@ -16,15 +16,12 @@
 
 #define TICKS_PER_INCH			142
 
-#define WIDETOTE_WIDTH 			-3934	//This is an arbitrary number until the code is tested and i receive the gear ratios.
-#define SLIMTOTE_WIDTH 			-1279	//This is an arbitrary number until the code is tested and i receive the gear ratios.
-#define TRASHCAN_WIDTH 			-1576	//This is an arbitrary number until the code is tested and i receive the gear ratios.
-#define MANUEVER_WIDTH 			25	//This is an arbitrary number until the code is tested and i receive the gear ratios.
-#define TOOPEN_WIDTH 			-4868	//This is an arbitrary number until the code is tested and i receive the gear ratios.
-#define TOCLOSED_WIDTH			0	//This is the exact number for the Closed position
-
+#define WIDETOTE_WIDTH 			-3934 	//
+#define SLIMTOTE_WIDTH 			-1279	//This is the raw encoder value (in ticks)
+#define TRASHCAN_WIDTH 			-1576	//This is the raw encoder value (in ticks)
+#define TOOPEN_WIDTH 			-4868	//This is the raw encoder value (in ticks)
+#define TOCLOSED_WIDTH			0		//This is the exact number for the Closed position
 #define INFINITE_ERROR	        999999999999.0 //This is an absurdly large number to set the error term for the encoder setpoint so no matter how jacked up the encoder gets it will still go to the "outside position" (encoder value 0)
-//#define RESET_ERROR				-10000.0
 /**
  *
  *

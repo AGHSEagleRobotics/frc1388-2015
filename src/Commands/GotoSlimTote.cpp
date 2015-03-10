@@ -23,20 +23,27 @@ GotoSlimTote::GotoSlimTote() {
 // Called just before this Command runs the first time
 void GotoSlimTote::Initialize() {
 	RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
-	RobotMap::grabbersGrabberCANTalon->EnableControl();
+		RobotMap::grabbersGrabberCANTalon->EnableControl();
+		double currentposition = (RobotMap::grabbersGrabberCANTalon->GetPosition());
+		RobotMap::grabbersGrabberCANTalon->Set(SLIMTOTE_WIDTH);
+
 
 }
 
 // Called repeatedly when this Command is scheduled to run
 void GotoSlimTote::Execute() {
-	double currentposition = (RobotMap::grabbersGrabberCANTalon->GetPosition());
-	RobotMap::grabbersGrabberCANTalon->Set(SLIMTOTE_WIDTH);
 	
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool GotoSlimTote::IsFinished() {
-	return true;
+	if(RobotMap::grabbersGrabberCANTalon->GetPosition() == SLIMTOTE_WIDTH)
+		{
+		return true;
+		}
+		else{
+			return false;
+		}
 }
 
 // Called once after isFinished returns true

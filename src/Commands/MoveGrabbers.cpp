@@ -33,32 +33,26 @@ void MoveGrabbers::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void MoveGrabbers::Execute() {
 	signed int pov = Robot::oi->getopStick()->GetPOV();
-	isPositionControl = (RobotMap::grabbersGrabberCANTalon->GetControlMode() == CANSpeedController::kPosition);
-	if (pov == 90 && m_povPrevState != 90) {
-		isPositionControl = !isPositionControl;
-		if(isPositionControl){
-			RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
-			RobotMap::grabbersGrabberCANTalon->EnableControl();
-		}else{
-			RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPercentVbus);
-		}
-	}
-
-	m_povPrevState = pov;
-
-	if (isPositionControl) {
-		double currentPosition = RobotMap::grabbersGrabberCANTalon->GetPosition();
-		float ModifiedOpStickY = (Robot::oi->getOpStickY() * -500);
-		RobotMap::grabbersGrabberCANTalon->Set( currentPosition + ModifiedOpStickY);
-	} else {
-		RobotMap::grabbersGrabberCANTalon->Set(-1 * Robot::oi->getOpStickY());
-		if(RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed())
-				{
-					RobotMap::grabbersGrabberCANTalon->SetPosition(0);
-				printf("Inside limit: %d \n"
-						, RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed());
-				}
+		isPositionControl = (RobotMap::grabbersGrabberCANTalon->GetControlMode() == CANSpeedController::kPosition);
+		if (pov == 90 && m_povPrevState != 90) {
+			isPositionControl = !isPositionControl;
+			if(isPositionControl){
+				RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
+				RobotMap::grabbersGrabberCANTalon->EnableControl();
+			}else{
+				RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPercentVbus);
 			}
+		}
+
+		m_povPrevState = pov;
+
+		if (isPositionControl) {
+			double currentPosition = RobotMap::grabbersGrabberCANTalon->GetPosition();
+			float ModifiedOpStickY = (Robot::oi->getOpStickY() * -500);
+			RobotMap::grabbersGrabberCANTalon->Set( currentPosition + ModifiedOpStickY);
+		} else {
+			RobotMap::grabbersGrabberCANTalon->Set(-1 * Robot::oi->getOpStickY());
+				}
 	}
 
 // Make this return true when this Command no longer needs to run execute()

@@ -24,18 +24,25 @@ GrabbersToOpen::GrabbersToOpen() {
 // Called just before this Command runs the first time
 void GrabbersToOpen::Initialize() {
 	RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
-	RobotMap::grabbersGrabberCANTalon->EnableControl();
+		RobotMap::grabbersGrabberCANTalon->EnableControl();
+		RobotMap::grabbersGrabberCANTalon->Set(TOOPEN_WIDTH);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void GrabbersToOpen::Execute() {
-	RobotMap::grabbersGrabberCANTalon->Set(TOOPEN_WIDTH);
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool GrabbersToOpen::IsFinished() {
-	return true;
+	if(RobotMap::grabbersGrabberCANTalon->GetEncPosition() == TOOPEN_WIDTH)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 }
 
 // Called once after isFinished returns true
