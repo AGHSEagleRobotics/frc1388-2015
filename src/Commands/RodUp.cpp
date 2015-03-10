@@ -8,7 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
+#define MOTOR_UP_VALUE 1
 #include "RodUp.h"
 
 RodUp::RodUp() {
@@ -22,7 +22,8 @@ RodUp::RodUp() {
 
 // Called just before this Command runs the first time
 void RodUp::Initialize() {
-	
+	RobotMap::rodRodMotor->Set(MOTOR_UP_VALUE);
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -37,11 +38,13 @@ bool RodUp::IsFinished() {
 
 // Called once after isFinished returns true
 void RodUp::End() {
-	
+
+	RobotMap::rodRodMotor->Set(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void RodUp::Interrupted() {
+	End();
 
 }

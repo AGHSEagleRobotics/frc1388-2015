@@ -8,7 +8,7 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
+#define MOTOR_DOWN_VALUE (-1)
 #include "RodDown.h"
 
 RodDown::RodDown() {
@@ -22,7 +22,8 @@ RodDown::RodDown() {
 
 // Called just before this Command runs the first time
 void RodDown::Initialize() {
-	
+	RobotMap::rodRodMotor->Set(MOTOR_DOWN_VALUE);
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -37,11 +38,12 @@ bool RodDown::IsFinished() {
 
 // Called once after isFinished returns true
 void RodDown::End() {
-	
+
+	RobotMap::rodRodMotor->Set(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void RodDown::Interrupted() {
-
+	End();
 }
