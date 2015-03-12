@@ -61,7 +61,7 @@ void RobotMap::init() {
 	
 	driveTrainRobotDrive41->SetSafetyEnabled(true);
         driveTrainRobotDrive41->SetExpiration(0.1);
-       driveTrainRobotDrive41->SetSensitivity(0.5);
+        driveTrainRobotDrive41->SetSensitivity(0.5);
         driveTrainRobotDrive41->SetMaxOutput(1.0);
         driveTrainRobotDrive41->SetInvertedMotor(RobotDrive::kFrontLeftMotor, true);
         driveTrainRobotDrive41->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);

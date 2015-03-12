@@ -20,7 +20,6 @@
 #include "Commands/ControlledDrive.h"
 #include "Commands/Drive.h"
 #include "Commands/EnableGyro.h"
-#include "Commands/GotoManuever.h"
 #include "Commands/GotoSlimTote.h"
 #include "Commands/GotoTote.h"
 #include "Commands/GotoTrashcan.h"

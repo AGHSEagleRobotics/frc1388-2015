@@ -66,7 +66,7 @@ Drive::Execute() {
 	Robot::driveTrain->robotDrive41->MecanumDrive_Cartesian(joystickX, joystickY, joystickZ, 0);//TODO: change back to gyro angle
 	if(Robot::oi->getdriveStick()->GetRawButton(2) == true)
 	{
-		RobotMap::driveTrainGyro->Reset();
+//		RobotMap::driveTrainGyro->Reset();
 	}
 }
 

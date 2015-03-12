@@ -24,7 +24,7 @@
 
 
 #define ROBOT_SET_DISTANCE 60
-#define ELEVATOR_MOVE_HEIGHT 7 //somewhat random numbers picked, need refining
+#define ELEVATOR_MOVE_HEIGHT 7 //TODO: somewhat random numbers picked, need refining
 #define TOTE_SET_DISTANCE 110
 
 
@@ -32,8 +32,15 @@
 #define HOR_STACK_DIST 81
 #define SLEEP_TIME 3
 #define SECOND_SLEEP 7
+
+AutonomousCommand::AutonomousCommand(){
+	AddSequential(new GotoTote());
+	AddSequential(new SetSetpoint(8.7513));
+	AddSequential(new AutonomousMove(141.75));
+}
+
 AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) {
-	printf("The robot is in Autonomous\n");
+	/*printf("The robot is in Autonomous\n");
 	command = commandInput;
 	AddSequential(new SetElevatorZeroPoint());
 
@@ -69,7 +76,7 @@ AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) 
 		 * the numbers are, for the most part, not interchangeable so this autonomous command
 		 * will not be good for on the spot calculations at competition
 		 */
-		AddSequential(new AutonomousMove(51)); //
+/*		AddSequential(new AutonomousMove(51)); //
 		AddSequential(new AutonomousTurn(90)); //
 		AddSequential(new AutonomousMove(27.6)); //
 		AddSequential(new GotoSlimTote()); //
@@ -100,10 +107,11 @@ AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) 
 		break;
 
 	}
-
+*/
 
 }
-AutonomousCommand::AutonomousCommand(uint8_t startPos, uint8_t stackLevel){
+
+/*AutonomousCommand::AutonomousCommand(uint8_t startPos, uint8_t stackLevel){
 	command = StackedToteSet;
 	AddSequential(new SetElevatorZeroPoint);
 	switch (startPos){
@@ -217,3 +225,4 @@ AutonomousCommand::AutonomousCommand(uint8_t startPos, uint8_t stackLevel){
 
 	}
 }
+*/

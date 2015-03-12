@@ -29,6 +29,7 @@ public:
 		StackedToteSet, // Don't use manually
 		StepAttack
 	};
+	AutonomousCommand();
 	AutonomousCommand(AutonomousCommand::Command_t commandInput=RobotSet);
 	AutonomousCommand(uint8_t, uint8_t);
 private:

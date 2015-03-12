@@ -35,14 +35,12 @@ void GrabbersToOpen::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool GrabbersToOpen::IsFinished() {
+	//TODO: verify that the joystick commands can override these setpoint commands.
 	if(RobotMap::grabbersGrabberCANTalon->GetEncPosition() == TOOPEN_WIDTH)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+	{
+		return true;
+	}
+	return false;
 }
 
 // Called once after isFinished returns true

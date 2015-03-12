@@ -32,13 +32,14 @@ void GotoTrashcan::Execute() {
 
 	
 }
-
+//test
 // Make this return true when this Command no longer needs to run execute()
 bool GotoTrashcan::IsFinished() {
 	if(RobotMap::grabbersGrabberCANTalon->GetPosition() == TRASHCAN_WIDTH)
 	{
-	return true;
+		return true;
 	}
+	return false;
 }
 // Called once after isFinished returns true
 void GotoTrashcan::End() {
