@@ -24,8 +24,8 @@ GrabbersToOpen::GrabbersToOpen() {
 // Called just before this Command runs the first time
 void GrabbersToOpen::Initialize() {
 	RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
-		RobotMap::grabbersGrabberCANTalon->EnableControl();
-		RobotMap::grabbersGrabberCANTalon->Set(TOOPEN_WIDTH);
+	RobotMap::grabbersGrabberCANTalon->EnableControl();
+	RobotMap::grabbersGrabberCANTalon->Set(TOOPEN_WIDTH);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -36,13 +36,7 @@ void GrabbersToOpen::Execute() {
 // Make this return true when this Command no longer needs to run execute()
 bool GrabbersToOpen::IsFinished() {
 	//TODO: verify that the joystick commands can override these setpoint commands.
-	float currentPos = RobotMap::grabbersGrabberCANTalon->GetPosition();
-	float error = TOOPEN_WIDTH - currentPos;
-	if(error >= THRESH_HOLD){	//Tommy just changed this code from <= to >=
-		return true;
-	}else{
-		return false;
-	}
+	return true;
 }
 
 // Called once after isFinished returns true

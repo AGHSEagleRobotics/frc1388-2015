@@ -23,8 +23,8 @@ GotoTrashcan::GotoTrashcan() {
 // Called just before this Command runs the first time
 void GotoTrashcan::Initialize() {
 	RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
-		RobotMap::grabbersGrabberCANTalon->EnableControl();
-		RobotMap::grabbersGrabberCANTalon->Set(TRASHCAN_WIDTH);
+	RobotMap::grabbersGrabberCANTalon->EnableControl();
+	RobotMap::grabbersGrabberCANTalon->Set(TRASHCAN_WIDTH);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -35,13 +35,7 @@ void GotoTrashcan::Execute() {
 //test
 // Make this return true when this Command no longer needs to run execute()
 bool GotoTrashcan::IsFinished() {
-	float currentPos = RobotMap::grabbersGrabberCANTalon->GetPosition();
-	float error = TRASHCAN_WIDTH - currentPos;
-	if(error >= THRESH_HOLD){	//Tommy just changed this code from <= to >=
-		return true;
-	}else{
-		return false;
-	}
+	return true;
 }
 // Called once after isFinished returns true
 void GotoTrashcan::End() {

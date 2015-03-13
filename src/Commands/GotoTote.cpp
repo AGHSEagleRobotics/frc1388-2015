@@ -24,8 +24,8 @@ GotoTote::GotoTote() {
 // Called just before this Command runs the first time
 void GotoTote::Initialize() {
 	RobotMap::grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
-		RobotMap::grabbersGrabberCANTalon->EnableControl();
-		 RobotMap::grabbersGrabberCANTalon->Set(WIDETOTE_WIDTH);
+	RobotMap::grabbersGrabberCANTalon->EnableControl();
+	RobotMap::grabbersGrabberCANTalon->Set(WIDETOTE_WIDTH);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -34,13 +34,7 @@ void GotoTote::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool GotoTote::IsFinished() {
-	float currentPos = RobotMap::grabbersGrabberCANTalon->GetPosition();
-	float error = WIDETOTE_WIDTH - currentPos;
-	if(error >= THRESH_HOLD){ 	//Tommy just changed this code from <= to >=
-		return true;
-	}else{
-		return false;
-	}
+	return true;
 }
 
 // Called once after isFinished returns true
