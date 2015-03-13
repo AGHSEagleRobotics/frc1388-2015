@@ -26,7 +26,7 @@ MoveElevator::MoveElevator() {
 
 // Called just before this Command runs the first time
 void MoveElevator::Initialize() {
-	isPositionControl = true;
+	isPositionControl = false;
 	m_povPrevState = 42069; //Scott picked this "magic" number
 	RobotMap::elevatorElevatorTalon->SetControlMode(CANTalon::kPosition);
 }
@@ -35,7 +35,7 @@ void MoveElevator::Initialize() {
 void MoveElevator::Execute() {
 	//This first part is basically an event listener for the POV (D-Pad) of the controller
 
-	signed int pov = Robot::oi->getopStick()->GetPOV();
+	/*signed int pov = Robot::oi->getopStick()->GetPOV();
 	double currentPosition = (RobotMap::elevatorElevatorTalon->GetPosition());
 	float setpoint = 0;
 	switch(pov){
@@ -62,27 +62,26 @@ void MoveElevator::Execute() {
 	}
 
 	m_povPrevState = pov;
-
+*/
 	//This part is for actually moving the elevator manually with a joystick
 
 	float joystickZ = Robot::oi->getOpStickZ();
-	float scaledJoystickZ = (joystickZ * JOYSTICK_SCALING);
+	//float scaledJoystickZ = (joystickZ * JOYSTICK_SCALING);
 
-	static bool bStop = false;
+	//static bool bStop = false;
 
 	if(isPositionControl){
-		setpoint = currentPosition + scaledJoystickZ;
-		if (scaledJoystickZ != 0){ // prevents drifting
-			bStop = true;
-			RobotMap::elevatorElevatorTalon->Set(setpoint);
-			printf("Setpoint: %f, %f, %f\n", setpoint, currentPosition, scaledJoystickZ);
-		}else{
-			if(bStop){
-				RobotMap::elevatorElevatorTalon->Set(currentPosition);
-				RobotMap::elevatorElevatorTalon->ClearIaccum();
-				bStop = false;
-			}
-		}
+		//setpoint = currentPosition + scaledJoystickZ;
+		//if (scaledJoystickZ != 0){ // prevents drifting
+		//	bStop = true;
+		//	RobotMap::elevatorElevatorTalon->Set(setpoint);
+		//	printf("Setpoint: %f, %f, %f\n", setpoint, currentPosition, scaledJoystickZ);
+		//}else{
+		//	if(bStop){
+		//		RobotMap::elevatorElevatorTalon->Set(currentPosition);
+		//		RobotMap::elevatorElevatorTalon->ClearIaccum();
+		//		bStop = false;
+		//	}
 	}else{
 
 		if(joystickZ <= 0.0){

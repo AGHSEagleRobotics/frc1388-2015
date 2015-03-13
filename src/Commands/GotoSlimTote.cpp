@@ -36,11 +36,13 @@ void GotoSlimTote::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool GotoSlimTote::IsFinished() {
-	if(RobotMap::grabbersGrabberCANTalon->GetPosition() == SLIMTOTE_WIDTH)
-	{
+	float currentPos = RobotMap::grabbersGrabberCANTalon->GetPosition();
+	float error = SLIMTOTE_WIDTH - currentPos;
+	if(fabs(error) < THRESH_HOLD){
 		return true;
+	}else{
+		return false;
 	}
-	return false;
 }
 
 // Called once after isFinished returns true

@@ -34,11 +34,13 @@ void GotoTote::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool GotoTote::IsFinished() {
-	if(RobotMap::grabbersGrabberCANTalon->GetPosition() == WIDETOTE_WIDTH)
-	{
-		return true;
-	}
-	return false;
+	float currentPos = RobotMap::grabbersGrabberCANTalon->GetPosition();
+		float error = WIDETOTE_WIDTH - currentPos;
+		if(fabs(error) < THRESH_HOLD){
+			return true;
+		}else{
+			return false;
+		}
 }
 
 // Called once after isFinished returns true
