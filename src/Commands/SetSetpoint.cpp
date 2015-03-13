@@ -21,7 +21,7 @@ SetSetpoint::SetSetpoint(float setpoint) {
 
 // Called just before this Command runs the first time
 void SetSetpoint::Initialize() {
-	
+	RobotMap::elevatorElevatorTalon->SetControlMode(CANSpeedController::kPosition);
 }
 
 // Called repeatedly when this Command is scheduled to run

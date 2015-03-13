@@ -36,10 +36,10 @@
 AutonomousCommand::AutonomousCommand(){
 	AddSequential(new GotoTote());
 	AddSequential(new SetSetpoint(8.7513));
-	AddSequential(new AutonomousMove(141.75));
+	AddSequential(new AutonomousMove(125.9));
 }
 
-AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) {
+/*AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) {
 	/*printf("The robot is in Autonomous\n");
 	command = commandInput;
 	AddSequential(new SetElevatorZeroPoint());
@@ -109,7 +109,7 @@ AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) 
 	}
 */
 
-}
+//}
 
 /*AutonomousCommand::AutonomousCommand(uint8_t startPos, uint8_t stackLevel){
 	command = StackedToteSet;

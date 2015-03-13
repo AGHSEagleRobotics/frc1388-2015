@@ -45,7 +45,6 @@ void Robot::RobotInit() {
 	// Put paramter here since we can't do it inside the autogen'd code
 	//delete autonomousCommand; // free memory
 	//autonomousCommand = new AutonomousCommand();
-
   }
 
 void Robot::GlobalInit(){
@@ -57,7 +56,7 @@ void Robot::GlobalPeriodic(){
 		RobotMap::driveTrainGyro->Reset();
 		RobotMap::driveTrainDefaultGyro->Reset();
 	}
-	float currentPosition = RobotMap::elevatorElevatorTalon->GetPosition();
+	float currentPosition = RobotMap::grabbersGrabberCANTalon->GetPosition();
 	float insideLimit = RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed();
 	float bottomLimit = RobotMap::elevatorElevatorTalon->IsRevLimitSwitchClosed();
 

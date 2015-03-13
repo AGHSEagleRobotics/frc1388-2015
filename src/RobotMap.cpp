@@ -91,7 +91,7 @@ void RobotMap::init() {
     grabbersGrabberCANTalon = new CANTalon (11);
     grabbersGrabberCANTalon->SetControlMode(CANSpeedController::kPosition);
    // grabbersGrabberCANTalon->ConfigMaxOutputVoltage(6);
-    grabbersGrabberCANTalon->SetPID(1,0.001,0);
+    grabbersGrabberCANTalon->SetPID(1,0,0);
     grabbersGrabberCANTalon->SetIzone(2000);
     grabbersGrabberCANTalon->EnableControl();
     grabbersGrabberCANTalon->ConfigNeutralMode(CANSpeedController::kNeutralMode_Brake);

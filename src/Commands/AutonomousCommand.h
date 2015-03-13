@@ -30,8 +30,8 @@ public:
 		StepAttack
 	};
 	AutonomousCommand();
-	AutonomousCommand(AutonomousCommand::Command_t commandInput=RobotSet);
-	AutonomousCommand(uint8_t, uint8_t);
+//	AutonomousCommand(AutonomousCommand::Command_t commandInput=RobotSet);
+//	AutonomousCommand(uint8_t, uint8_t);
 private:
 	Command_t command;
 
