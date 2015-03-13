@@ -28,7 +28,7 @@ MoveElevator::MoveElevator() {
 void MoveElevator::Initialize() {
 	isPositionControl = false;
 	m_povPrevState = 42069; //Scott picked this "magic" number
-	RobotMap::elevatorElevatorTalon->SetControlMode(CANTalon::kPosition);
+	RobotMap::elevatorElevatorTalon->SetControlMode(CANTalon::kPercentVbus);
 }
 
 // Called repeatedly when this Command is scheduled to run
