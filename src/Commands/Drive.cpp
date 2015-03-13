@@ -34,9 +34,10 @@ Drive::Execute() {
 	float joystickX		 	= Robot::oi->getDriveStickX();
 	float joystickY		 	= Robot::oi->getDriveStickY();
 	float joystickZ		 	= Robot::oi->getDriveStickZ();
-	joystickX = (joystickX * joystickX);
-	joystickY = (joystickY * joystickY);
-	joystickZ = (joystickZ * joystickZ);
+
+	joystickX = (joystickX * joystickX) * (Robot::signOf(joystickX));
+	joystickY = (joystickY * joystickY) * (Robot::signOf(joystickY));
+	joystickZ = (joystickZ * joystickZ) * (Robot::signOf(joystickZ));
 //	float gyroAngle	 		= RobotMap::driveTrainGyro->GetAngleZ();
 //	float gyroAngle	 		= RobotMap::driveTrainDefaultGyro->GetAngle();
 //	float currentError   	= 0;

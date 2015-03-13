@@ -36,11 +36,11 @@
 AutonomousCommand::AutonomousCommand(){
 	AddSequential(new GotoTote());
 	AddSequential(new SetSetpoint(8.7513));
-	AddSequential(new AutonomousMove(125.9));
+	AddSequential(new AutonomousMove(129.9));
 }
 
 /*AutonomousCommand::AutonomousCommand(AutonomousCommand::Command_t commandInput) {
-	/*printf("The robot is in Autonomous\n");
+	 `printf("The robot is in Autonomous\n");
 	command = commandInput;
 	AddSequential(new SetElevatorZeroPoint());
 
@@ -67,7 +67,7 @@ AutonomousCommand::AutonomousCommand(){
 		AddSequential(new GrabbersToOpen());
 		break;
 	case StepAttack:
-		/* Step Attack is an Autonomous possibility that involves grabbing totes and recyclecans for
+		 Step Attack is an Autonomous possibility that involves grabbing totes and recyclecans for
 		 * the purpose of the game more than scoring in autonomous
 		 *
 		 * the many magical numbers below are pre-calculated distances, measurements, and turning
@@ -75,8 +75,8 @@ AutonomousCommand::AutonomousCommand(){
 		 *
 		 * the numbers are, for the most part, not interchangeable so this autonomous command
 		 * will not be good for on the spot calculations at competition
-		 */
-/*		AddSequential(new AutonomousMove(51)); //
+
+		AddSequential(new AutonomousMove(51)); //
 		AddSequential(new AutonomousTurn(90)); //
 		AddSequential(new AutonomousMove(27.6)); //
 		AddSequential(new GotoSlimTote()); //

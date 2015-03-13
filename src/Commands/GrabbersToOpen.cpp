@@ -37,12 +37,12 @@ void GrabbersToOpen::Execute() {
 bool GrabbersToOpen::IsFinished() {
 	//TODO: verify that the joystick commands can override these setpoint commands.
 	float currentPos = RobotMap::grabbersGrabberCANTalon->GetPosition();
-		float error = TOOPEN_WIDTH - currentPos;
-		if(fabs(error) < THRESH_HOLD){
-			return true;
-		}else{
-			return false;
-		}
+	float error = TOOPEN_WIDTH - currentPos;
+	if(error >= THRESH_HOLD){	//Tommy just changed this code from <= to >=
+		return true;
+	}else{
+		return false;
+	}
 }
 
 // Called once after isFinished returns true

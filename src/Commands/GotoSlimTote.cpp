@@ -38,7 +38,7 @@ void GotoSlimTote::Execute() {
 bool GotoSlimTote::IsFinished() {
 	float currentPos = RobotMap::grabbersGrabberCANTalon->GetPosition();
 	float error = SLIMTOTE_WIDTH - currentPos;
-	if(fabs(error) < THRESH_HOLD){
+	if(error >= THRESH_HOLD){	//Tommy just changed this code from <= to >=
 		return true;
 	}else{
 		return false;

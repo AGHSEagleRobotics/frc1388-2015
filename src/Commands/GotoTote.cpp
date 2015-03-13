@@ -35,12 +35,12 @@ void GotoTote::Execute() {
 // Make this return true when this Command no longer needs to run execute()
 bool GotoTote::IsFinished() {
 	float currentPos = RobotMap::grabbersGrabberCANTalon->GetPosition();
-		float error = WIDETOTE_WIDTH - currentPos;
-		if(fabs(error) < THRESH_HOLD){
-			return true;
-		}else{
-			return false;
-		}
+	float error = WIDETOTE_WIDTH - currentPos;
+	if(error >= THRESH_HOLD){ 	//Tommy just changed this code from <= to >=
+		return true;
+	}else{
+		return false;
+	}
 }
 
 // Called once after isFinished returns true
