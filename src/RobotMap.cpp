@@ -57,7 +57,7 @@ void RobotMap::init() {
         driveTrainRobotDrive41->SetMaxOutput(1.0);
         driveTrainRobotDrive41->SetInvertedMotor(RobotDrive::kFrontLeftMotor, true);
         driveTrainRobotDrive41->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
-	driveTrainDriveencoder = new Encoder(2, 3, false, Encoder::k1X);
+	driveTrainDriveencoder = new Encoder(0, 1, false, Encoder::k1X);
 	lw->AddSensor("DriveTrain", "Driveencoder ", driveTrainDriveencoder);
 	driveTrainDriveencoder->SetDistancePerPulse(0.0274176);
         driveTrainDriveencoder->SetPIDSourceParameter(Encoder::kDistance);

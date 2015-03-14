@@ -56,11 +56,11 @@ void Robot::GlobalPeriodic(){
 		RobotMap::driveTrainGyro->Reset();
 		RobotMap::driveTrainDefaultGyro->Reset();
 	}
-	float currentPosition = RobotMap::driveTrainDriveencoder->GetDistance();
+//	float currentPosition = RobotMap::driveTrainDriveencoder->GetDistance();
 	float insideLimit = RobotMap::grabbersGrabberCANTalon->IsFwdLimitSwitchClosed();
 	float bottomLimit = RobotMap::elevatorElevatorTalon->IsRevLimitSwitchClosed();
 
-	printf("Encoder: %f\n", currentPosition);
+//	printf("Encoder: %f\n", currentPosition);
 
 	if(insideLimit){
 		RobotMap::grabbersGrabberCANTalon->SetPosition(0.0);
