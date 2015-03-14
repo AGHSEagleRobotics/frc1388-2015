@@ -3,29 +3,7 @@ Version 1.5
 ---
 Children:
 - Children:
-  - Children:
-    - Children: []
-      Properties:
-        Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: &id001 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
-            '23', '24', '25']
-          default: '0'
-          name: Input Channel (Digital)
-          validators: &id002 [DigitalChannel]
-          value: '2'
-      Base: Limit Switch
-      Name: ElevatorTopLimit
-    - Children: []
-      Properties:
-        Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
-          default: '0'
-          name: Input Channel (Digital)
-          validators: *id002
-          value: '3'
-      Base: Limit Switch
-      Name: ElevatorBottomLimit
+  - Children: []
     Properties:
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Default Command, type: Command, validators: null, value: MoveElevator}
@@ -36,65 +14,65 @@ Children:
       - Children: []
         Properties:
           Type: !!robotbuilder.data.properties.ChoicesProperty
-            choices: &id003 [Victor, Jaguar, Talon, VictorSP, TalonSRX]
+            choices: &id001 [Victor, Jaguar, Talon, VictorSP, TalonSRX]
             default: Talon
             name: Type
             validators: null
             value: Talon
           Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-            choices: &id004 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+            choices: &id002 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
               '11', '12', '13', '14', '15', '16', '17', '18', '19']
             default: '0'
             name: Output Channel (PWM)
-            validators: &id005 [PWMOutput]
+            validators: &id003 [PWMOutput]
             value: '3'
         Base: Speed Controller
         Name: Leftfronttalon
       - Children: []
         Properties:
           Type: !!robotbuilder.data.properties.ChoicesProperty
-            choices: *id003
+            choices: *id001
             default: Talon
             name: Type
             validators: null
             value: Talon
           Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-            choices: *id004
+            choices: *id002
             default: '0'
             name: Output Channel (PWM)
-            validators: *id005
+            validators: *id003
             value: '2'
         Base: Speed Controller
         Name: Rightfronttalon
       - Children: []
         Properties:
           Type: !!robotbuilder.data.properties.ChoicesProperty
-            choices: *id003
+            choices: *id001
             default: Talon
             name: Type
             validators: null
             value: Talon
           Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-            choices: *id004
+            choices: *id002
             default: '0'
             name: Output Channel (PWM)
-            validators: *id005
+            validators: *id003
             value: '1'
         Base: Speed Controller
         Name: 'Leftbacktalon '
       - Children: []
         Properties:
           Type: !!robotbuilder.data.properties.ChoicesProperty
-            choices: *id003
+            choices: *id001
             default: Talon
             name: Type
             validators: null
             value: Talon
           Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-            choices: *id004
+            choices: *id002
             default: '0'
             name: Output Channel (PWM)
-            validators: *id005
+            validators: *id003
             value: '0'
         Base: Speed Controller
         Name: 'Rightbacktalon '
@@ -150,7 +128,7 @@ Children:
           default: '0'
           name: Channel A Channel (Digital)
           validators: &id007 [DigitalChannel]
-          value: '0'
+          value: '2'
         Distance Per Pulse: !!robotbuilder.data.properties.DoubleProperty {default: 1,
           name: Distance Per Pulse, validators: null, value: 0.0274176}
         PID Source: !!robotbuilder.data.properties.ChoicesProperty
@@ -174,7 +152,7 @@ Children:
           default: '0'
           name: Channel B Channel (Digital)
           validators: &id011 [DigitalChannel]
-          value: '1'
+          value: '3'
       Base: Quadrature Encoder
       Name: 'Driveencoder '
     - Children: []
@@ -198,30 +176,32 @@ Children:
     - Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
+          choices: &id004 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
+            '23', '24', '25']
           default: '0'
           name: Input Channel (Digital)
-          validators: *id002
+          validators: &id005 [DigitalChannel]
           value: '6'
       Base: Limit Switch
       Name: Grabberoutsidelimit
     - Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
+          choices: *id004
           default: '0'
           name: Input Channel (Digital)
-          validators: *id002
+          validators: *id005
           value: '4'
       Base: Limit Switch
       Name: Grabberinsidelimit
     - Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
+          choices: *id004
           default: '0'
           name: Input Channel (Digital)
-          validators: *id002
+          validators: *id005
           value: '9'
       Base: Limit Switch
       Name: Grabbertotelimit
@@ -583,9 +563,8 @@ Children:
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Eagle
-      Robotics\workspace', extension: null, folder: true, name: Eclipse Workspace,
-    validators: null, value: ..\}
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Joey\workspace',
+    extension: null, folder: true, name: Eclipse Workspace, validators: null, value: ..\}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
   Java Package: !!robotbuilder.data.properties.StringProperty {default: org.usfirst.frc0000,
