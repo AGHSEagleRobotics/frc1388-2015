@@ -21,6 +21,7 @@
 #include "Commands/ControlledDrive.h"
 #include "Commands/Drive.h"
 #include "Commands/EnableGyro.h"
+#include "Commands/FeederCommand.h"
 #include "Commands/GotoSlimTote.h"
 #include "Commands/GotoTote.h"
 #include "Commands/GotoTrashcan.h"
@@ -39,10 +40,10 @@ OI::OI() {
 
 	opStick = new Joystick(2);
 	
+	feederButton = new JoystickButton(opStick, 3);
+	feederButton->WhenPressed(new FeederCommand());
 	grabTrashcan = new JoystickButton(opStick, 4);
 	grabTrashcan->WhenPressed(new GotoTrashcan());
-	grabNormalTote = new JoystickButton(opStick, 3);
-	grabNormalTote->WhenPressed(new GotoTote());
 	grabSlimTote = new JoystickButton(opStick, 2);
 	grabSlimTote->WhenPressed(new GotoSlimTote());
 	openGrabbers = new JoystickButton(opStick, 1);

@@ -51,13 +51,11 @@ void MoveElevator::Execute() {
 		if (m_povPrevState == 270)
 			break;
 
-//		printf("isPositionControl: %d\n", isPositionControl);
+		//		printf("isPositionControl: %d\n", isPositionControl);
 		isPositionControl = !isPositionControl;
 		if(isPositionControl){
 			Robot::elevator->elevatorTalon->SetControlMode(CANSpeedController::kPosition);
 			Robot::elevator->elevatorTalon->ClearIaccum();
-		}else{
-			Robot::elevator->elevatorTalon->SetControlMode(CANSpeedController::kPercentVbus);
 		}
 	}
 
@@ -84,15 +82,13 @@ void MoveElevator::Execute() {
 			}
 		}
 	}else{
-
-		if(joystickZ <= 0.0){
-			RobotMap::elevatorElevatorTalon->Set(joystickZ);
-		}else{
-
-			RobotMap::elevatorElevatorTalon->Set(joystickZ);
+		if(joystickZ != 0.0){
+			Robot::elevator->elevatorTalon->SetControlMode(CANSpeedController::kPercentVbus);
 		}
+		RobotMap::elevatorElevatorTalon->Set(joystickZ);
 	}
 }
+
 
 
 
@@ -103,7 +99,7 @@ bool MoveElevator::IsFinished() {
 
 // Called once after isFinished returns true
 void MoveElevator::End() {
-	
+
 }
 
 // Called when another command which requires one or more of the same
