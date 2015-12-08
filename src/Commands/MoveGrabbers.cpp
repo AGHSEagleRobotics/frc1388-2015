@@ -32,7 +32,7 @@ void MoveGrabbers::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void MoveGrabbers::Execute() {
-	signed int pov = Robot::oi->getOpStick()->GetPOV();
+	signed int pov = Robot::oi->getopStick()->GetPOV();
 	isPositionControl = (RobotMap::grabbersGrabberCANTalon->GetControlMode() == CANSpeedController::kPosition);
 
 	if (pov == 90 && m_povPrevState != 90) {

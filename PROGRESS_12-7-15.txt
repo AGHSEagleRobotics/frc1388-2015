@@ -1,7 +1,0 @@
-- recently created command 'GrabBox' to act as Autonomous Command for picking up box (under
-XBOX controller, select button-- which is button 11)
-
-- IS COMPLETELY UNTESTED
-
-- function of Set and SetPosition functions not specifically known whilst 
-writing GrabBox, so may be incorrect

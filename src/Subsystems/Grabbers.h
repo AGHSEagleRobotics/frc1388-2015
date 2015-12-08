@@ -20,8 +20,7 @@
 #define SLIMTOTE_WIDTH 			-1020	//This is the raw encoder value (in ticks)
 #define TRASHCAN_WIDTH 			-1680	//This is the raw encoder value (in ticks)
 #define TOOPEN_WIDTH 			-4418	//This is the raw encoder value (in ticks)
-#define INFINITE_ERROR	999999999999.0 //This is an absurdly large number to set the error term for the encoder setpoint so no matter how jacked up the encoder gets it will still go to the "outside position" (encoder value 0)
-#define BOX_WIDTH               -3550 //25" converted to raw encoder value, extra inch to allow for room
+#define INFINITE_ERROR	        999999999999.0 //This is an absurdly large number to set the error term for the encoder setpoint so no matter how jacked up the encoder gets it will still go to the "outside position" (encoder value 0)
 /**
  *
  *
