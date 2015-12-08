@@ -35,7 +35,7 @@ void MoveElevator::Initialize() {
 void MoveElevator::Execute() {
 	//This first part is basically an event listener for the POV (D-Pad) of the controller
 
-	signed int pov = Robot::oi->getopStick()->GetPOV();
+	signed int pov = Robot::oi->getOpStick()->GetPOV();
 	double currentPosition = (RobotMap::elevatorElevatorTalon->GetPosition());
 	float setpoint = 0;
 	switch(pov){
